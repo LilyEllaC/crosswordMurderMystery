@@ -38,13 +38,13 @@ def main():
                 if gameState == gameStates.PLAYING or gameState == gameStates.PLAYING_WITH_CROSSWORD_OPEN:
                     keys = pygame.key.get_pressed()
                     if keys[pygame.K_w]:
-                        game.map.y = 30
+                        game.map.y = 32
                     if keys[pygame.K_s]:
-                        game.map.y -= 30
+                        game.map.y -= 32
                     if keys[pygame.K_a]:
-                        game.map.x += 30
+                        game.map.x += 32
                     if keys[pygame.K_d]:
-                        game.map.x -= 30
+                        game.map.x -= 32
 
         if gameState == gameStates.STARTING_SCREEN:
             intro.titleScreen()

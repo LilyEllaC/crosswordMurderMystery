@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.height=height
 
         #image
-        image=pygame.image.load("assets/start.png")
+        image=pygame.image.load("assets/crow.png")
         self.image=pygame.transform.scale(image, (width, height))
         self.rect=self.image.get_rect()
         self.rect.x=x
