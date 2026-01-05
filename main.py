@@ -10,25 +10,6 @@ screen=pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
 pygame.display.set_caption("Crossword Game")
 running=True
 
-
-
-#helpful pushing text to screen function
-def toScreen(words, font, colour, x, y):
-    text=font.render(words, True, colour)
-    textRect=text.get_rect()
-    textRect.center=(x, y)
-    screen.blit(text, textRect)
-#versions to push more than 1 line
-def toScreen2(words1, words2, font, colour, x, y):
-    toScreen(words1, font, colour, x, y-font.get_height()//2)
-    toScreen(words2, font, colour, x, y+font.get_height()//2)
-def toScreen3(words1, words2, words3, font, colour, x, y):
-    toScreen(words1, font, colour, x, y-font.get_height())
-    toScreen(words2, font, colour, x, y)
-    toScreen(words3, font, colour, x, y+font.get_height())
-
-
-
 #main
 def main():
     global running
@@ -37,6 +18,11 @@ def main():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running=False
+
+        bg = pygame.image.load("start.png")
+        bg = pygame.transform.scale(bg, (constants.WIDTH, constants.HEIGHT))
+        screen.blit(bg, (0,0))
+        pygame.display.flip()
 
 if __name__=="__main__":
     main()
