@@ -1,4 +1,6 @@
 import pygame
+import constants
+import utility
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
@@ -20,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.y+=yMove
 
 
-class objects(pygame.sprite.Sprite):
+class Objects(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, appearance1, appearance2):
         self.x=x
         self.y=y
@@ -45,3 +47,32 @@ class objects(pygame.sprite.Sprite):
         else:
             return False
         
+
+class Button():
+    def __init__(self, x, y, width, height, text, font, colour1, colour2, hasOutline:bool):
+        self.x=x
+        self.y=y
+        self.width=width
+        self.height=height
+        self.text=text
+        self.font=font
+        self.colours=[colour1, colour2]
+        self.colour=colour1
+        self.hasOutline=hasOutline
+
+    def drawRect(self):
+        rect=(self.x, self.y, self.width, self.height)
+        pygame.draw.rect(constants.screen, self.colour, rect)
+        if self.hasOutline:
+            pygame.draw.rect(constants.screen, self.colour, rect, 3)
+        utility.toScreen(self.text, self.font, self.x+self.width//2, self.y+self.height//2)
+
+
+    def mouseHoveredOver(self):
+        mouseX, mouseY=pygame.mouse.get_pos()
+        if (mouseX>self.x and mouseX<self.x+self.width) and (mouseY>self.y and mouseY<self.y+self.height):
+            self.colour=self.colours[1]
+        else:
+            self.colour=self.colours[0]
+            
+
