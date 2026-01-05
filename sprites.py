@@ -68,7 +68,7 @@ class Button():
         pygame.draw.rect(constants.screen, self.colour, rect)
         if self.hasOutline:
             pygame.draw.rect(constants.screen, self.colour, rect, 3)
-        utility.toScreen(self.text, self.font, self.x+self.width//2, self.y+self.height//2, constants.screen)
+        utility.toScreen(self.text, self.font, constants.BLACK, self.x+self.width//2, self.y+self.height//2, constants.screen)
 
 
     def mouseHoveredOver(self):
