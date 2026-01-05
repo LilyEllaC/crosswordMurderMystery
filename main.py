@@ -1,4 +1,5 @@
 import pygame
+import intro
 
 pygame.init()
 
@@ -18,6 +19,7 @@ def main():
                 running=False
 
 
+        intro.titleScreen()
         pygame.display.flip()
 
 if __name__=="__main__":
