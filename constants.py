@@ -1,4 +1,4 @@
-import pygame
+# import pygame
 
 # pygame.init()
 
@@ -29,16 +29,6 @@ WHITE=(255,255,255)
 BLACK=(0,0,0)
 GRAY=(177,177,177)
 DARK_GRAY=(100,100,100)
-
-
-FONT_TYPE='w.ttf'
-FONT15=pygame.font.Font(FONT_TYPE, 15)
-FONT20=pygame.font.Font(FONT_TYPE, 20)
-FONT25=pygame.font.Font(FONT_TYPE, 25)
-FONT30=pygame.font.Font(FONT_TYPE, 30)
-FONT37=pygame.font.Font(FONT_TYPE, 37)
-FONT40=pygame.font.Font(FONT_TYPE, 40)
-FONT200=pygame.font.Font(FONT_TYPE, 200)
 
 
 #fonts/font sizes
