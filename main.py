@@ -18,8 +18,8 @@ def main():
             if event.type==pygame.QUIT:
                 running=False
 
-
         intro.titleScreen()
+        print(intro.startButton.isHovered())
         pygame.display.flip()
 
 if __name__=="__main__":
