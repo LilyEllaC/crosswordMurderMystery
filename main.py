@@ -1,20 +1,9 @@
 import pygame
 
+pygame.init()
 
 import constants
-
-pygame.init()
 # pylint: disable=no-member
-
-FONT_TYPE='w.ttf'
-FONT15=pygame.font.Font(FONT_TYPE, 15)
-FONT20=pygame.font.Font(FONT_TYPE, 20)
-FONT25=pygame.font.Font(FONT_TYPE, 25)
-FONT30=pygame.font.Font(FONT_TYPE, 30)
-FONT37=pygame.font.Font(FONT_TYPE, 37)
-FONT40=pygame.font.Font(FONT_TYPE, 40)
-FONT200=pygame.font.Font(FONT_TYPE, 200)
-
 
 #screen stuff (dimensions etc)
 screen=pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
@@ -49,6 +38,6 @@ def main():
             if event.type==pygame.QUIT:
                 running=False
 
-if __name__=="main":
+if __name__=="__main__":
     main()
     pygame.quit()
