@@ -22,6 +22,7 @@ pygame.display.set_caption("Crossword Game")
 running=True
 
 
+
 #helpful pushing text to screen function
 def toScreen(words, font, colour, x, y):
     text=font.render(words, True, colour)
