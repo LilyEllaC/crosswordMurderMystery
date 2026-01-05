@@ -19,7 +19,12 @@ def toScreen3(words1, words2, words3, font, colour, x, y):
     toScreen(words2, font, colour, x, y)
     toScreen(words3, font, colour, x, y+font.get_height())
 
+<<<<<<< HEAD
 def imageToScreen(imageName, x, y, width, height):
     image = pygame.image.load(imageName)
     image = pygame.transform.scale(image, (width, height))
     const.screen.blit(image, (x,y))
+=======
+def getActualGridSize():
+    return const.GRID_SIZE * const.GRID_SCALING
+>>>>>>> a63b2cec6cac6a1e986c938ebb38978c502e5feb
