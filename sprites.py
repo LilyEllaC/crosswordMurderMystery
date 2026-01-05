@@ -2,6 +2,8 @@ import pygame
 import constants
 import utility
 
+# pylint: disable=no-member
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
         super().__init__()
@@ -61,6 +63,7 @@ class Button():
         self.hasOutline=hasOutline
 
     def drawRect(self):
+        self.mouseHoveredOver(self)
         rect=(self.x, self.y, self.width, self.height)
         pygame.draw.rect(constants.screen, self.colour, rect)
         if self.hasOutline:

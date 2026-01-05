@@ -1,14 +1,11 @@
 import pygame
-import utility
 
 pygame.init()
 
 import constants
 # pylint: disable=no-member
 
-#screen stuff (dimensions etc)
-screen=pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
-pygame.display.set_caption("Crossword Game")
+#running variable so it stops
 running=True
 
 #main
@@ -20,11 +17,6 @@ def main():
             if event.type==pygame.QUIT:
                 running=False
 
-        bg = pygame.image.load("start.png")
-        bg = pygame.transform.scale(bg, (constants.WIDTH, constants.HEIGHT))
-        screen.blit(bg, (0,0))
-
-        utility.toScreen("Crossword Murder Mystery", constants.FONT60, constants.WHITE, constants.WIDTH / 2, 80, screen)
 
         pygame.display.flip()
 
