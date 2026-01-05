@@ -28,11 +28,23 @@ def main():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running=False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if intro.startButton.rect.collidepoint(event.pos):
-                    gameState=gameStates.PLAYING
-                elif intro.quitButton.rect.collidepoint(event.pos):
-                    running=False
+
+            elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+                if gameState == gameStates.STARTING_SCREEN:
+                    if intro.startButton.rect.collidepoint(event.pos):
+                        gameState=gameStates.PLAYING
+                    elif intro.quitButton.rect.collidepoint(event.pos):
+                        running=False
+                if gameState == gameStates.PLAYING or gameState == gameStates.PLAYING_WITH_CROSSWORD_OPEN:
+                    keys = pygame.key.get_pressed()
+                    if keys[pygame.K_w]:
+                        game.map.y = 30
+                    if keys[pygame.K_s]:
+                        game.map.y -= 30
+                    if keys[pygame.K_a]:
+                        game.map.x += 30
+                    if keys[pygame.K_d]:
+                        game.map.x -= 30
 
         if gameState == gameStates.STARTING_SCREEN:
             intro.titleScreen()

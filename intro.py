@@ -13,7 +13,7 @@ startButton=Button(const.WIDTH / 10 - quitButton.width / 2, const.HEIGHT-400, 20
 buttons=[startButton, quitButton]
 
 def titleScreen():
-    bg = pygame.image.load("start.png")
+    bg = pygame.image.load("assets/start.png")
     bg = pygame.transform.scale(bg, (const.WIDTH, const.HEIGHT))
 
     const.screen.blit(bg, (0,0))

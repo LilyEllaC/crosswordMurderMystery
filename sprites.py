@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.height=height
 
         #image
-        image=pygame.image.load("detective")
+        image=pygame.image.load("assets/start.png")
         self.image=pygame.transform.scale(image, (width, height))
         self.rect=self.image.get_rect()
         self.rect.x=x
@@ -23,6 +23,11 @@ class Player(pygame.sprite.Sprite):
         self.x+=xMove
         self.y+=yMove
 
+    def draw(self):
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+        const.screen.blit(self.image, self.rect)
 
 class Objects(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, appearance):
@@ -37,6 +42,12 @@ class Objects(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
+
+    def draw(self):
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+        const.screen.blit(self.image, self.rect)
 
 
 class Button():
