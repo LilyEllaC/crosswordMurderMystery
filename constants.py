@@ -4,6 +4,8 @@ WIDTH, HEIGHT=900,600
 FPS=30
 FPS_SCALING=30/FPS
 
+screen=pygame.display.set_mode((WIDTH, HEIGHT))
+
 #colours
 RED=(255,0,0)
 DARK_RED=(137,0,0)
@@ -29,6 +31,7 @@ GRAY=(177,177,177)
 DARK_GRAY=(100,100,100)
 
 
+pygame.font.init()
 #fonts/font sizes
 FONT_TYPE='w.ttf'
 FONT15=pygame.font.Font(FONT_TYPE, 15)
