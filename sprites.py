@@ -72,14 +72,6 @@ class Button():
             return True
         
         return False
-        
-
-    # def mouseHoveredOver(self):
-    #     mouseX, mouseY=pygame.mouse.get_pos()
-    #     if (mouseX>self.x and mouseX<self.x+self.width) and (mouseY>self.y and mouseY<self.y+self.height):
-    #         self.colour=self.colours[1]
-    #     else:
-    #         self.colour=self.colours[0]
             
 
 #sprites for different rooms
