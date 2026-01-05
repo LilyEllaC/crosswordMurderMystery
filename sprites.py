@@ -1,5 +1,5 @@
 import pygame
-import const
+import constants as const
 import utility
 
 # pylint: disable=no-member
@@ -41,6 +41,7 @@ class Objects(pygame.sprite.Sprite):
 
 class Button():
     def __init__(self, x, y, width, height, text, font, colour1, colour2, hasOutline:bool):
+        self.rect = None
         self.x=x
         self.y=y
         self.width=width
@@ -56,7 +57,7 @@ class Button():
         rect=(self.x, self.y, self.width, self.height)
         pygame.draw.rect(const.screen, self.colour, rect)
         if self.hasOutline:
-            pygame.draw.rect(const.screen, const.BLACK, rect, 3)
+            self.rect = pygame.draw.rect(const.screen, const.BLACK, rect, 3)
 
         utility.toScreen(self.text, self.font,const.BLUE,self.x+self.width//2, self.y+self.height//2)
 

@@ -8,7 +8,7 @@ def toScreen(words, font, colour, x, y):
     const.screen.blit(text, textRect)
 
 #versions to push more than 1 line
-def toScreen2(words1, words2, font, colour, x, y, screen):
+def toScreen2(words1, words2, font, colour, x, y):
     toScreen(words1, font, colour, x, y-font.get_height()//2)
     toScreen(words2, font, colour, x, y+font.get_height()//2)
 
