@@ -1,19 +1,30 @@
 import pygame
+import constants
 
 # pylint: disable=no-member
 
 pygame.init()
 
 #screen stuff (dimensions etc)
-WIDTH, HEIGHT=900,600
-screen=pygame.display.set_mode((WIDTH, HEIGHT))
+screen=pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
 pygame.display.set_caption("Crossword Game")
 running=True
 
-#code
-clock=pygame.time.Clock()
-FPS=30
-FPSScaling=30/FPS
+
+#helpful pushing text to screen function
+def toScreen(words, font, colour, x, y):
+    text=font.render(words, True, colour)
+    textRect=text.get_rect()
+    textRect.center=(x, y)
+    screen.blit(text, textRect)
+#versions to push more than 1 line
+def toScreen2(words1, words2, font, colour, x, y):
+    toScreen(words1, font, colour, x, y-font.get_height()//2)
+    toScreen(words2, font, colour, x, y+font.get_height()//2)
+def toScreen3(words1, words2, words3, font, colour, x, y):
+    toScreen(words1, font, colour, x, y-font.get_height())
+    toScreen(words2, font, colour, x, y)
+    toScreen(words3, font, colour, x, y+font.get_height())
 
 
 
