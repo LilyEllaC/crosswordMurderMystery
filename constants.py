@@ -1,5 +1,7 @@
 import pygame
 
+pygame.init()
+
 WIDTH, HEIGHT=900,600
 FPS=30
 FPS_SCALING=30/FPS

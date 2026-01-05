@@ -3,8 +3,6 @@ import constants
 
 # pylint: disable=no-member
 
-pygame.init()
-
 #screen stuff (dimensions etc)
 screen=pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
 pygame.display.set_caption("Crossword Game")
