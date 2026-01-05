@@ -1,16 +1,17 @@
 import pygame
-
 import game
 import intro
+import math
+import time
+
 from enum import Enum
 
 pygame.init()
-
-import constants
 import crossword
 
-#running variable so it stops
-running=True
+# running variable so it stops
+running = True
+
 
 class gameStates(Enum):
     STARTING_SCREEN = 1
@@ -18,33 +19,100 @@ class gameStates(Enum):
     PLAYING_WITH_CROSSWORD_OPEN = 3
     END = 4
 
-#main
+
+keysDown = []
+
+lastMoveTS = 0
+moveDelay = 150
+
+
+def addKey(key):
+    if key not in keysDown:
+        keysDown.append(key)
+
+
+def removeKey(key):
+    if key in keysDown:
+        keysDown.remove(key)
+
+
+def move(bypassDebounce):
+    global lastMoveTS
+
+    time_ms = time.time_ns() // 1_000_000
+
+    if bypassDebounce or time_ms - lastMoveTS > moveDelay:
+        lastMoveTS = time_ms
+
+        speed = 32
+
+        if ("w" in keysDown or "s" in keysDown) and (
+            "d" in keysDown or "a" in keysDown
+        ):
+            speed = speed / math.sqrt(2)
+
+        if "w" in keysDown:
+            game.map.y += speed
+        if "s" in keysDown:
+            game.map.y -= speed
+        if "a" in keysDown:
+            game.map.x += speed
+            game.player.set_direction("left")
+        if "d" in keysDown:
+            game.map.x -= speed
+            game.player.set_direction("right")
+
+
+# main
 def main():
     pygame.display.set_caption("Crossword Game")
+
     global running
-    gameState=gameStates.STARTING_SCREEN
+
+    gameState = gameStates.STARTING_SCREEN
 
     while running:
         for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                running=False
+            if event.type == pygame.QUIT:
+                running = False
 
             elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 if gameState == gameStates.STARTING_SCREEN:
-                    if intro.startButton.rect.collidepoint(event.pos):
-                        gameState=gameStates.PLAYING
-                    elif intro.quitButton.rect.collidepoint(event.pos):
-                        running=False
-                if gameState == gameStates.PLAYING or gameState == gameStates.PLAYING_WITH_CROSSWORD_OPEN:
+                    if intro.startButton.isHovered():
+                        gameState = gameStates.PLAYING
+                    elif intro.quitButton.isHovered():
+                        running = False
+
+                if (
+                    gameState == gameStates.PLAYING
+                    or gameState == gameStates.PLAYING_WITH_CROSSWORD_OPEN
+                ):
                     keys = pygame.key.get_pressed()
+
                     if keys[pygame.K_w]:
-                        game.map.y = 32
+                        addKey("w")
                     if keys[pygame.K_s]:
-                        game.map.y -= 32
+                        addKey("s")
                     if keys[pygame.K_a]:
-                        game.map.x += 32
+                        addKey("a")
                     if keys[pygame.K_d]:
-                        game.map.x -= 32
+                        addKey("d")
+
+                move(True)
+
+            elif event.type == pygame.KEYUP:
+                keys = pygame.key.get_pressed()
+
+                if not keys[pygame.K_w]:
+                    removeKey("w")
+                if not keys[pygame.K_s]:
+                    removeKey("s")
+                if not keys[pygame.K_a]:
+                    removeKey("a")
+                if not keys[pygame.K_d]:
+                    removeKey("d")
+
+        move(False)
 
         if gameState == gameStates.STARTING_SCREEN:
             intro.titleScreen()
@@ -57,6 +125,7 @@ def main():
 
         pygame.display.flip()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
     pygame.quit()
