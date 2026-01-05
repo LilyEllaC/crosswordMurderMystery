@@ -30,5 +30,6 @@ what is in the victim's hand: flower
 
 --general house:
 What is the colour of the carpet in the hallway: red
-What tree is on the office painting: cherry
+Which room is the biggest: Living room
+
 

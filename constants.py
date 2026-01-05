@@ -6,6 +6,7 @@ FPS_SCALING=30/FPS
 
 screen=pygame.display.set_mode((WIDTH, HEIGHT))
 
+
 #colours
 RED=(255,0,0)
 DARK_RED=(137,0,0)

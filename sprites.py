@@ -43,30 +43,35 @@ class Button():
     def __init__(self, x, y, width, height, text, font, colour1, colour2, hasOutline:bool):
         self.x=x
         self.y=y
+
         self.width=width
         self.height=height
+
         self.text=text
         self.font=font
+
         self.colours=[colour1, colour2]
         self.colour=colour1
+
         self.hasOutline=hasOutline
 
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+
     def drawRect(self):
-        self.mouseHoveredOver()
-        rect=(self.x, self.y, self.width, self.height)
-        pygame.draw.rect(const.screen, self.colour, rect)
+        pygame.draw.rect(const.screen, self.colour, self.rect)
+
         if self.hasOutline:
-            pygame.draw.rect(const.screen, const.BLACK, rect, 3)
+            pygame.draw.rect(const.screen, const.BLACK, self.rect, 3)
 
-        utility.toScreen(self.text, self.font,const.BLUE,self.x+self.width//2, self.y+self.height//2)
+        utility.toScreen(self.text, self.font, const.BLUE, self.x + self.width // 2, self.y + self.height // 2)
 
+    def isHovered(self):
+        mouseX, mouseY = pygame.mouse.get_pos()
 
-    def mouseHoveredOver(self):
-        mouseX, mouseY=pygame.mouse.get_pos()
-        if (mouseX>self.x and mouseX<self.x+self.width) and (mouseY>self.y and mouseY<self.y+self.height):
-            self.colour=self.colours[1]
-        else:
-            self.colour=self.colours[0]
+        if (self.rect.collidepoint(mouseX, mouseY)):
+            return True
+        
+        return False
             
 
 #sprites for different rooms
