@@ -6,6 +6,10 @@ FPS_SCALING=30/FPS
 
 screen=pygame.display.set_mode((WIDTH, HEIGHT))
 
+# Grid related
+GRID_SIZE = 32
+GRID_SCALING = 2
+
 #colours
 RED=(255,0,0)
 DARK_RED=(137,0,0)

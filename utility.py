@@ -16,3 +16,6 @@ def toScreen3(words1, words2, words3, font, colour, x, y):
     toScreen(words1, font, colour, x, y-font.get_height())
     toScreen(words2, font, colour, x, y)
     toScreen(words3, font, colour, x, y+font.get_height())
+
+def getActualGridSize():
+    return const.GRID_SIZE * const.GRID_SCALING
