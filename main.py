@@ -1,10 +1,10 @@
 import pygame
 import intro
-
+# pylint: disable=no-member
 pygame.init()
 
 import constants
-# pylint: disable=no-member
+import crossword
 
 #running variable so it stops
 running=True
@@ -20,6 +20,7 @@ def main():
 
 
         intro.titleScreen()
+        crossword.showCrossword()
         pygame.display.flip()
 
 if __name__=="__main__":

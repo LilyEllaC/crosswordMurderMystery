@@ -1,5 +1,5 @@
 import pygame
-import const
+import constants as const
 import utility
 
 # pylint: disable=no-member

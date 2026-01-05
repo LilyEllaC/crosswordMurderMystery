@@ -4,6 +4,7 @@ import constants as const
 from sprites import Player 
 from sprites import Objects
 from sprites import Button
+pygame.init()
 
 # pylint: disable=no-member
 
