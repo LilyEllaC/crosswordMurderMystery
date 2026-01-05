@@ -28,8 +28,10 @@ BLACK=(0,0,0)
 GRAY=(177,177,177)
 DARK_GRAY=(100,100,100)
 
+pygame.font.init()
+
 #fonts/font sizes
-FONT_TYPE='freesansbold.ttf'
+FONT_TYPE='w.ttf'
 FONT15=pygame.font.Font(FONT_TYPE, 15)
 FONT20=pygame.font.Font(FONT_TYPE, 20)
 FONT25=pygame.font.Font(FONT_TYPE, 25)
