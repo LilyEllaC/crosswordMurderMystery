@@ -1,5 +1,5 @@
 import pygame
-import constants
+import const
 import utility
 
 # pylint: disable=no-member
@@ -25,30 +25,19 @@ class Player(pygame.sprite.Sprite):
 
 
 class Objects(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height, appearance1, appearance2):
+    def __init__(self, x, y, width, height, appearance):
         self.x=x
         self.y=y
         self.width=width
         self.height=height
         
         #image
-        image=pygame.image.load(appearance1)
-        self.image1=appearance1
-        self.image2=appearance2
-
+        image=pygame.image.load(appearance)
         self.image=pygame.transform.scale(image, (width, height))
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
-    
-    def mouseOver(self):
-        mouseX, mouseY=pygame.mouse.get_pos()
-        if (mouseX>self.x and mouseX<self.x+self.width) and (mouseY>self.y and mouseY<self.y+self.height):
-            self.image=pygame.transform.scale(pygame.image.load(self.image2), (self.width, self.height))
-            return True
-        else:
-            return False
-        
+
 
 class Button():
     def __init__(self, x, y, width, height, text, font, colour1, colour2, hasOutline:bool):
@@ -65,11 +54,11 @@ class Button():
     def drawRect(self):
         self.mouseHoveredOver()
         rect=(self.x, self.y, self.width, self.height)
-        pygame.draw.rect(constants.screen, self.colour, rect)
+        pygame.draw.rect(const.screen, self.colour, rect)
         if self.hasOutline:
-            pygame.draw.rect(constants.screen, constants.BLACK, rect, 3)
+            pygame.draw.rect(const.screen, const.BLACK, rect, 3)
 
-        utility.toScreen(self.text, self.font,constants.BLUE,self.x+self.width//2, self.y+self.height//2)
+        utility.toScreen(self.text, self.font,const.BLUE,self.x+self.width//2, self.y+self.height//2)
 
 
     def mouseHoveredOver(self):
@@ -79,4 +68,37 @@ class Button():
         else:
             self.colour=self.colours[0]
             
+
+#sprites for different rooms
+def spriteClues():
+    def __init__(self):
+        self.fryingPan=Objects(const.WIDTH//2, const.HEIGHT//2, 50, 50, "fryingPan.png")
+        self.fruitBowl=Objects(const.WIDTH//2+100, const.HEIGHT//2, 50, 50, "fruitBowl.png")
+        self.flowerPot=Objects(const.WIDTH//2-100, const.HEIGHT//2, 50, 50, "flowerPot.png")
+        self.flowers=Objects(const.WIDTH//2+200, const.HEIGHT//2, 50, 50, "flowers.png")
+        self.leadPipe=Objects(const.WIDTH//2-200, const.HEIGHT//2, 50, 50, "pipe.png")
+        self.leadPipe=Objects(const.WIDTH//2-200, const.HEIGHT//2, 50, 50, "pipe.png")
+        self.glasses=Objects(const.WIDTH//2-300, const.HEIGHT//2, 50, 50, "glasses.png")
+        self.candle=Objects(const.WIDTH//2+300, const.HEIGHT//2, 50, 50, "candleStick.png")
+        self.brokenMirror=Objects(const.WIDTH//2-400, const.HEIGHT//2, 50, 50, "mirrorPieces.png")
+        self.wrench=Objects(const.WIDTH//2+400, const.HEIGHT//2, 50, 50, "wrench.png")
+        self.rope=Objects(const.WIDTH//2, const.HEIGHT//2-100, 50, 50, "rope.png")
+        self.clock=Objects(const.WIDTH//2, const.HEIGHT//2+100, 50, 50, "brokenClock.png")
+
+        #creating sprite groups
+        self.kitchenSprites=pygame.sprite.Group()
+        self.bathroomSprites=pygame.sprite.Group()
+        self.livingRoomSprites=pygame.sprite.Group()
+        self.diningRoomSprites=pygame.sprite.Group()
+        self.bedroomSprites=pygame.sprite.Group()
+        self.gardenSprites=pygame.sprite.Group()
+        self.houseSprites=pygame.sprite.Group()
+
+        #adding
+        self.kitchenSprite.add(self.fryingPan, self.fruitBowl)
+        self.bathroomSprite.add(self.candleStick, self.brokenMirror)
+        self.livingRoomSprites.add(self.glasses)
+        self.diningRoomSprites.add(self.wrench, self.rope)
+        self.bedroomSprites.add(self.clock)
+        self.gardenSprites.add(self.flowerPot, self.flowers)
 
