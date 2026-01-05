@@ -1,4 +1,5 @@
 import pygame
+import utility
 
 pygame.init()
 
@@ -22,6 +23,9 @@ def main():
         bg = pygame.image.load("start.png")
         bg = pygame.transform.scale(bg, (constants.WIDTH, constants.HEIGHT))
         screen.blit(bg, (0,0))
+
+        utility.toScreen("Crossword Murder Mystery", constants.FONT60, constants.WHITE, constants.WIDTH / 2, 80, screen)
+
         pygame.display.flip()
 
 if __name__=="__main__":
