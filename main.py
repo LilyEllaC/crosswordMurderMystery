@@ -1,4 +1,7 @@
 import pygame
+
+pygame.init()
+
 import constants
 
 # pylint: disable=no-member

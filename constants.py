@@ -1,6 +1,6 @@
 import pygame
 
-pygame.init()
+# pygame.init()
 
 WIDTH, HEIGHT=900,600
 FPS=30
@@ -30,9 +30,7 @@ BLACK=(0,0,0)
 GRAY=(177,177,177)
 DARK_GRAY=(100,100,100)
 
-pygame.font.init()
 
-#fonts/font sizes
 FONT_TYPE='w.ttf'
 FONT15=pygame.font.Font(FONT_TYPE, 15)
 FONT20=pygame.font.Font(FONT_TYPE, 20)
@@ -41,3 +39,6 @@ FONT30=pygame.font.Font(FONT_TYPE, 30)
 FONT37=pygame.font.Font(FONT_TYPE, 37)
 FONT40=pygame.font.Font(FONT_TYPE, 40)
 FONT200=pygame.font.Font(FONT_TYPE, 200)
+
+
+#fonts/font sizes
