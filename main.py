@@ -3,6 +3,7 @@ import constants as const
 import pygame
 import game
 import intro
+import asyncio
 
 # import math
 import time
@@ -133,7 +134,7 @@ def addToSquare():
 
 
 # main
-def main():
+async def main():
     pygame.display.set_caption("Crossword Murder Mystery")
 
     global running
@@ -280,8 +281,9 @@ def main():
             print("end")
 
         pygame.display.flip()
+        await asyncio.sleep(0)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
     pygame.quit()
