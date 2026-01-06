@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.x = x
         self.rect.y = y
+        self.movement=1
 
         self.direction = "right"
 
@@ -106,7 +107,7 @@ class Button:
         return False
 
 
-# sprites for different rooms
+# sprites for different rooms #USELESS
 def spriteClues():
     def __init__(self):
         self.fryingPan = Objects(
