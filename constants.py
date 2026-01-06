@@ -38,6 +38,7 @@ DARK_GRAY=(100,100,100)
 pygame.font.init()
 #fonts/font sizes
 FONT_TYPE='w.ttf'
+FONT10=pygame.font.Font(FONT_TYPE, 10)
 FONT15=pygame.font.Font(FONT_TYPE, 15)
 FONT20=pygame.font.Font(FONT_TYPE, 20)
 FONT25=pygame.font.Font(FONT_TYPE, 25)
