@@ -87,6 +87,7 @@ class Button:
 
         self.colours = [colour1, colour2]
         self.colour = colour1
+        self.textColour = const.BLUE
 
         self.hasOutline = hasOutline
 
@@ -101,7 +102,7 @@ class Button:
         utility.toScreen(
             self.text,
             self.font,
-            const.BLUE,
+            self.textColour,
             self.x + self.width // 2,
             self.y + self.height // 2,
         )

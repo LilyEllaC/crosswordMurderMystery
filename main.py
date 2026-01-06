@@ -3,6 +3,7 @@ import datetime
 import constants as const
 import pygame
 import game
+import help
 import intro
 import end
 import asyncio
@@ -30,6 +31,7 @@ class gameStates(Enum):
     PLAYING = 2
     CROSSWORD = 3
     END = 4
+    HELP = 5
 
 
 keysDown = []
@@ -174,6 +176,10 @@ async def main():
                         gameState = gameStates.CROSSWORD
                         continue
 
+                    if game.helpButton.isHovered() and event.type==pygame.MOUSEBUTTONDOWN:
+                        gameState=gameStates.HELP
+                        continue
+
                     keys = pygame.key.get_pressed()
 
                     relative_x = (
@@ -283,6 +289,10 @@ async def main():
                     ):
                         gameState = gameStates.PLAYING
 
+                if gameState == gameStates.HELP:
+                    if event.type == pygame.MOUSEBUTTONDOWN and help.backButton.isHovered():
+                        gameState=gameStates.PLAYING
+
                 move(True)
 
             elif event.type == pygame.KEYUP:
@@ -307,6 +317,8 @@ async def main():
             crossword.showCrossword()
         elif gameState == gameStates.END:
             end.showEnd()
+        elif gameState == gameStates.HELP:
+            help.showHelp()
 
         pygame.display.flip()
         clock.tick(const.FPS)
