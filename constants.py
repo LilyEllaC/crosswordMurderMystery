@@ -34,6 +34,7 @@ def reevalConstants(coords):
     for coord in coords["bottom"]:
         BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
 
+
 try:
     with open("coords.json", "r") as f:
         existingCoords = json.load(f)

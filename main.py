@@ -160,8 +160,11 @@ async def main():
 
             if event.type == const.GAME_ENDED_EVENT:
                 gameState = gameStates.END
+                audio.stop_theme()
 
-            elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+                audio.play_sfx("assets/grave.ogg")
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 if gameState == gameStates.STARTING_SCREEN:
                     if intro.startButton.isHovered():
                         gameState = gameStates.PLAYING
@@ -172,22 +175,30 @@ async def main():
                     elif intro.quitButton.isHovered():
                         running = False
 
-                if gameState == gameStates.END:
-                    if end.backButton.isHovered():
-                        gameState = gameStates.STARTING_SCREEN
-
                 if gameState == gameStates.PLAYING:
-                    if (
-                        game.crosswordButton.isHovered()
-                        and event.type == pygame.MOUSEBUTTONDOWN
-                    ):
+                    if game.crosswordButton.isHovered():
                         gameState = gameStates.CROSSWORD
                         continue
 
-                    if game.helpButton.isHovered() and event.type==pygame.MOUSEBUTTONDOWN:
-                        gameState=gameStates.HELP
+                    if game.helpButton.isHovered():
+                        gameState = gameStates.HELP
                         continue
 
+                if gameState == gameStates.END:
+                    if end.backButton.isHovered():
+                        gameState = gameStates.STARTING_SCREEN
+                        audio.play_theme("assets/clue.ogg")
+
+                if gameState == gameStates.CROSSWORD:
+                    if crossword.gameButton.isHovered():
+                        gameState = gameStates.PLAYING
+
+                if gameState == gameStates.HELP:
+                    if help.backButton.isHovered():
+                        gameState = gameStates.PLAYING
+
+            elif event.type == pygame.KEYDOWN:
+                if gameState == gameStates.PLAYING:
                     keys = pygame.key.get_pressed()
 
                     relative_x = (
@@ -289,17 +300,7 @@ async def main():
                     addToSquare()
 
                 if gameState == gameStates.CROSSWORD:
-                    if event.type == pygame.KEYDOWN:
-                        crossword.typing(event)
-                    if (
-                        event.type == pygame.MOUSEBUTTONDOWN
-                        and crossword.gameButton.isHovered
-                    ):
-                        gameState = gameStates.PLAYING
-
-                if gameState == gameStates.HELP:
-                    if event.type == pygame.MOUSEBUTTONDOWN and help.backButton.isHovered():
-                        gameState=gameStates.PLAYING
+                    crossword.typing(event)
 
                 move(True)
 
