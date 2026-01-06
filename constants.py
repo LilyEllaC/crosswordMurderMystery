@@ -1,4 +1,5 @@
 import pygame
+import json
 
 DEV_MODE = True
 WIDTH, HEIGHT = 900, 600
@@ -10,9 +11,20 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # Grid related
 GRID_SIZE = 32
 GRID_SCALING = 2
-BLOCKED_POSITIONS = [
-    (-256, -32),
-]
+LEFT_COORDS = list()
+RIGHT_COORDS = list()
+TOP_COORDS = list()
+BOTTOM_COORDS = list()
+
+d = json.load(open("coords.json"))
+for coord in d["left"]:
+    LEFT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+for coord in d["right"]:
+    RIGHT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+for coord in d["top"]:
+    TOP_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+for coord in d["bottom"]:
+    BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
 
 # colours
 RED = (255, 0, 0)
