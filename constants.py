@@ -9,6 +9,9 @@ screen=pygame.display.set_mode((WIDTH, HEIGHT))
 # Grid related
 GRID_SIZE = 32
 GRID_SCALING = 2
+BLOCKED_POSITIONS = [
+    (-256, -32),
+]
 
 #colours
 RED=(255,0,0)

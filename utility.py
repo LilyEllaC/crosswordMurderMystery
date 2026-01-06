@@ -23,5 +23,13 @@ def imageToScreen(imageName, x, y, width, height):
     image = pygame.image.load(imageName)
     image = pygame.transform.scale(image, (width, height))
     const.screen.blit(image, (x,y))
+
+def isAllowedToMoveToDest(destinationPos):
+    for x in const.BLOCKED_POSITIONS:
+        if x[0] == destinationPos[0] and x[1] == destinationPos[1]:
+            return False
+
+    return True
+
 def getActualGridSize():
     return const.GRID_SIZE * const.GRID_SCALING

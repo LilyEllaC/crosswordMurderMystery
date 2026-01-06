@@ -8,6 +8,9 @@ import time
 import json
 
 from enum import Enum
+
+import utility
+
 # pylint: disable=no-member
 
 pygame.init()
@@ -65,20 +68,34 @@ def move(bypassDebounce):
         #     speed = speed / math.sqrt(2)
 
         if "w" in keysDown:
-            game.map.y += speed
+            newPos = (game.map.x, game.map.y + speed)
+
+            if utility.isAllowedToMoveToDest(newPos):
+                game.map.y += speed
+
         if "s" in keysDown:
-            game.map.y -= speed
+            newPos = (game.map.x, game.map.y - speed)
+
+            if utility.isAllowedToMoveToDest(newPos):
+                game.map.y -= speed
         if "a" in keysDown:
-            game.map.x += speed
+            newPos = (game.map.x + speed, game.map.y)
+
+            if utility.isAllowedToMoveToDest(newPos):
+                game.map.x += speed
+
             game.player.set_direction("left")
         if "d" in keysDown:
-            game.map.x -= speed
+            newPos = (game.map.x - speed, game.map.y)
+
+            if utility.isAllowedToMoveToDest(newPos):
+                game.map.x -= speed
             game.player.set_direction("right")
 
 
 # main
 def main():
-    pygame.display.set_caption("Crossword Game")
+    pygame.display.set_caption("Crossword Murder Mystery")
 
     global running
 
