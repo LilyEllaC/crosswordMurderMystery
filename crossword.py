@@ -348,7 +348,7 @@ class Boxes():
 
 class Letters():
     def __init__(self, correctLetter, x, y):
-        self.letter=correctLetter
+        self.letter=" "
         self.font=const.FONT20
         self.correctLetter=correctLetter
         self.x=x+14
