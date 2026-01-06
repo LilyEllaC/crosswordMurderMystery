@@ -5,7 +5,8 @@ import pygame
 import game
 import help
 import intro
-import end
+import won
+import loss
 import asyncio
 
 # import math
@@ -30,8 +31,9 @@ class gameStates(Enum):
     STARTING_SCREEN = 1
     PLAYING = 2
     CROSSWORD = 3
-    END = 4
+    WON = 4
     HELP = 5
+    LOSS = 6
 
 
 keysDown = []
@@ -153,10 +155,12 @@ async def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            if event.type == const.GAME_ENDED_EVENT:
-                gameState = gameStates.END
-
-            elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+            """
+            if event.type == const.GAME_LOST_EVENT:
+                gameState = gameStates.LOSS
+            if event.type == const.GAME_WON_EVENT:
+                gameState = gameStates.WON"""
+            if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 if gameState == gameStates.STARTING_SCREEN:
                     if intro.startButton.isHovered():
                         gameState = gameStates.PLAYING
@@ -164,8 +168,8 @@ async def main():
                     elif intro.quitButton.isHovered():
                         running = False
 
-                if gameState == gameStates.END:
-                    if end.backButton.isHovered():
+                if gameState == gameStates.WON:
+                    if won.backButton.isHovered():
                         gameState = gameStates.STARTING_SCREEN
 
                 if gameState == gameStates.PLAYING:
@@ -179,7 +183,8 @@ async def main():
                     if game.helpButton.isHovered() and event.type==pygame.MOUSEBUTTONDOWN:
                         gameState=gameStates.HELP
                         continue
-
+                    #if game.s==1:
+                     #   gameState=gameStates.LOSS
                     keys = pygame.key.get_pressed()
 
                     relative_x = (
@@ -288,6 +293,8 @@ async def main():
                         and crossword.gameButton.isHovered
                     ):
                         gameState = gameStates.PLAYING
+                   
+
 
                 if gameState == gameStates.HELP:
                     if event.type == pygame.MOUSEBUTTONDOWN and help.backButton.isHovered():
@@ -306,7 +313,10 @@ async def main():
                     removeKey("a")
                 if not keys[pygame.K_d]:
                     removeKey("d")
-
+        if crossword.textAndBoxes.checkIfNameCorrect() and gameState==gameStates.CROSSWORD:
+            gameState=gameStates.WON
+        if game.timing():
+            gameState=gameStates.LOSS
         move(False)
 
         if gameState == gameStates.STARTING_SCREEN:
@@ -315,10 +325,12 @@ async def main():
             game.showGame()
         elif gameState == gameStates.CROSSWORD:
             crossword.showCrossword()
-        elif gameState == gameStates.END:
-            end.showEnd()
+        elif gameState == gameStates.WON:
+            won.showEnd()
         elif gameState == gameStates.HELP:
             help.showHelp()
+        elif gameState == gameStates.LOSS:
+            loss.showEnd()
 
         pygame.display.flip()
         clock.tick(const.FPS)

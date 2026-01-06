@@ -40,6 +40,19 @@ crosswordButton=sprites.Button(10, 10, 200, 50, "Crossword", const.FONT37, const
 helpButton=sprites.Button(10, const.HEIGHT - 50, 30, 45, "?", const.FONT37, const.WHITE, const.DARK_GREEN, False)
 helpButton.textColour = const.BLACK
 
+def timing():
+    if startTime is not None:
+        seconds_left = const.TIME_IN_SECONDS if not startTime else int(
+            max(0, const.TIME_IN_SECONDS - (datetime.datetime.now() - startTime).total_seconds()))
+        formatted = "{:d}:{:02d}".format(*divmod(seconds_left, 60))
+        utility.toScreen(formatted, const.FONT37, const.BLACK, const.WIDTH - 50, const.HEIGHT - 30)
+
+        if seconds_left == 0:
+            return True
+            #pygame.event.post(pygame.event.Event(const.GAME_LOSS_EVENT))
+        else:
+            return False
+
 def showGame():
     const.screen.fill(const.BLACK)
     map.draw()
@@ -52,14 +65,7 @@ def showGame():
     s.fill((255, 255, 255, 128))  # notice the alpha value in the color
     const.screen.blit(s, (const.WIDTH - 90, const.HEIGHT - 45))
 
-    if startTime is not None:
-        seconds_left = const.TIME_IN_SECONDS if not startTime else int(
-            max(0, const.TIME_IN_SECONDS - (datetime.datetime.now() - startTime).total_seconds()))
-        formatted = "{:d}:{:02d}".format(*divmod(seconds_left, 60))
-        utility.toScreen(formatted, const.FONT37, const.BLACK, const.WIDTH - 50, const.HEIGHT - 30)
-
-        if seconds_left == 0:
-            pygame.event.post(pygame.event.Event(const.GAME_ENDED_EVENT))
+    timing()
 
     for square_x, square_y in leftSquares:
         const.screen.blit(leftSquareSurface, (map.x + square_x, map.y + square_y))

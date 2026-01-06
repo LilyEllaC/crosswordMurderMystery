@@ -379,6 +379,12 @@ class TextAndBoxes:
             if self.textList[i].letter!=self.textList[i].correctLetter:
                 return False
         return True
+    
+    def checkIfNameCorrect(self):
+        for i in range(len(self.textList)-29,len(self.textList)-18):
+            if self.textList[i].letter!=self.textList[i].correctLetter:
+                return False
+        return True
 
     def showSpecial(self):
         for box in self.boxList:
@@ -419,7 +425,7 @@ class Boxes:
 
 class Letters:
     def __init__(self, correctLetter, x, y):
-        self.letter = " "
+        self.letter = correctLetter#" "
         self.font = const.FONT20
         self.correctLetter = correctLetter
         self.x = x + 14
