@@ -33,8 +33,6 @@ keysDown = []
 lastMoveTS = 0
 moveDelay = 150
 
-devMode = False
-
 # DEV #####
 
 existingCoords = json.load(open("coords.json"))
@@ -90,32 +88,35 @@ def move(bypassDebounce):
         #     speed = speed / math.sqrt(2)
 
         if "w" in keysDown:
-            newPos = (game.map.x, game.map.y + speed)
+            # newPos = (game.map.x, game.map.y + speed)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest("top"):
                 game.map.y += speed
 
         if "s" in keysDown:
-            newPos = (game.map.x, game.map.y - speed)
+            # newPos = (game.map.x, game.map.y - speed)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest("bottom"):
                 game.map.y -= speed
         if "a" in keysDown:
-            newPos = (game.map.x + speed, game.map.y)
+            # newPos = (game.map.x + speed, game.map.y)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest("left"):
                 game.map.x += speed
 
             game.player.set_direction("left")
         if "d" in keysDown:
-            newPos = (game.map.x - speed, game.map.y)
+            # newPos = (game.map.x - speed, game.map.y)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest("right"):
                 game.map.x -= speed
             game.player.set_direction("right")
 
 
 def addToSquare():
+    if not const.DEV_MODE:
+        return
+
     game.leftSquares = []
     game.rightSquares = []
     game.topSquares = []
@@ -131,22 +132,6 @@ def addToSquare():
         game.bottomSquares.append(coord["relative"])
 
 
-def checkCoords(coords):
-    for coord in coords:
-        if [game.map.x, game.map.y] == coord["absolute"]:
-            # print("coords exist")
-            return True
-    return False
-
-
-def findCoordIndex(coords):
-    for i, coord in enumerate(coords):
-        if [game.map.x, game.map.y] == coord["absolute"]:
-            # print("found at index", i)
-            return i
-    return -1
-
-
 # main
 def main():
     pygame.display.set_caption("Crossword Murder Mystery")
@@ -155,8 +140,7 @@ def main():
 
     gameState = gameStates.STARTING_SCREEN
 
-    if devMode:
-        addToSquare()
+    addToSquare()
 
     while running:
         for event in pygame.event.get():
@@ -194,65 +178,71 @@ def main():
                     if keys[pygame.K_d]:
                         addKey("d")
                     if keys[pygame.K_LEFT]:
-                        if checkCoords(leftCoords):
-                            idx = findCoordIndex(leftCoords)
-                            leftCoords.pop(idx)
-                        else:
-                            leftCoords.append(
-                                {
-                                    "relative": [relative_x, relative_y],
-                                    "absolute": [game.map.x, game.map.y],
-                                }
-                            )
+                        if const.DEV_MODE:
+                            if utility.checkCoords(leftCoords):
+                                idx = utility.findCoordIndex(leftCoords)
+                                leftCoords.pop(idx)
+                            else:
+                                leftCoords.append(
+                                    {
+                                        "relative": [relative_x, relative_y],
+                                        "absolute": [game.map.x, game.map.y],
+                                    }
+                                )
 
                     if keys[pygame.K_RIGHT]:
-                        if checkCoords(rightCoords):
-                            idx = findCoordIndex(rightCoords)
-                            rightCoords.pop(idx)
-                        else:
-                            rightCoords.append(
-                                {
-                                    "relative": [relative_x, relative_y],
-                                    "absolute": [game.map.x, game.map.y],
-                                }
-                            )
+                        if const.DEV_MODE:
+                            if utility.checkCoords(rightCoords):
+                                idx = utility.findCoordIndex(rightCoords)
+                                rightCoords.pop(idx)
+                            else:
+                                rightCoords.append(
+                                    {
+                                        "relative": [relative_x, relative_y],
+                                        "absolute": [game.map.x, game.map.y],
+                                    }
+                                )
 
                     if keys[pygame.K_UP]:
-                        if checkCoords(topCoords):
-                            idx = findCoordIndex(topCoords)
-                            topCoords.pop(idx)
-                        else:
-                            topCoords.append(
-                                {
-                                    "relative": [relative_x, relative_y],
-                                    "absolute": [game.map.x, game.map.y],
-                                }
-                            )
+                        if const.DEV_MODE:
+                            if utility.checkCoords(topCoords):
+                                idx = utility.findCoordIndex(topCoords)
+                                topCoords.pop(idx)
+                            else:
+                                topCoords.append(
+                                    {
+                                        "relative": [relative_x, relative_y],
+                                        "absolute": [game.map.x, game.map.y],
+                                    }
+                                )
 
                     if keys[pygame.K_DOWN]:
-                        if checkCoords(bottomCoords):
-                            idx = findCoordIndex(bottomCoords)
-                            bottomCoords.pop(idx)
-                        else:
-                            bottomCoords.append(
-                                {
-                                    "relative": [relative_x, relative_y],
-                                    "absolute": [game.map.x, game.map.y],
-                                }
-                            )
+                        if const.DEV_MODE:
+                            if utility.checkCoords(bottomCoords):
+                                idx = utility.findCoordIndex(bottomCoords)
+                                bottomCoords.pop(idx)
+                            else:
+                                bottomCoords.append(
+                                    {
+                                        "relative": [relative_x, relative_y],
+                                        "absolute": [game.map.x, game.map.y],
+                                    }
+                                )
                     if keys[pygame.K_p]:
-                        with open("coords.json", "w") as f:
-                            json.dump(
-                                {
-                                    "left": leftCoords,
-                                    "right": rightCoords,
-                                    "top": topCoords,
-                                    "bottom": bottomCoords,
-                                },
-                                f,
-                                indent=4,
-                            )
-                        print("SAVED TO FILE")
+                        if const.DEV_MODE:
+                            with open("coords.json", "w") as f:
+                                json.dump(
+                                    {
+                                        "left": leftCoords,
+                                        "right": rightCoords,
+                                        "top": topCoords,
+                                        "bottom": bottomCoords,
+                                    },
+                                    f,
+                                    indent=4,
+                                )
+
+                            print("SAVED TO FILE")
 
                     addToSquare()
 
