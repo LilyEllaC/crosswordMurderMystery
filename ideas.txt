@@ -6,7 +6,6 @@ What is on the island in the kitchen: Knife
 garden: 
 how many flowers are in the red pot: four
 what colour are the 5 flowers: pink
-what is sticking out of the ground in the garden: pipe
 
 living room:
 where was suspect #4 at the time of the murder: kitchen
@@ -18,6 +17,7 @@ bathroom:
 what is on the edge of the sink: candlestick
 what is broken on the floor: mirror
 What is the floor in the bathroom made of: tiles
+Source of the bathroom drip: pipe
 
 dining room:
 what tool on the dining table: wrench
