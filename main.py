@@ -3,6 +3,7 @@ import constants as const
 import pygame
 import game
 import intro
+import end
 import asyncio
 
 # import math
@@ -156,8 +157,9 @@ async def main():
                         running = False
 
                 if gameState == gameStates.PLAYING:
-                    if game.crosswordButton.isHovered():
+                    if game.crosswordButton.isHovered() and event.type==pygame.MOUSEBUTTONDOWN:
                         gameState=gameStates.CROSSWORD
+                        continue
                     
                     keys = pygame.key.get_pressed()
 
@@ -251,7 +253,6 @@ async def main():
                     if event.type == pygame.KEYDOWN:
                         crossword.typing(event)
                     if event.type==pygame.MOUSEBUTTONDOWN and crossword.gameButton.isHovered:
-                        print("hello")
                         gameState=gameStates.PLAYING
 
 
@@ -274,11 +275,11 @@ async def main():
         if gameState == gameStates.STARTING_SCREEN:
             intro.titleScreen()
         elif gameState == gameStates.PLAYING:
-            game.show_game()
+            game.showGame()
         elif gameState == gameStates.CROSSWORD:
             crossword.showCrossword()
         elif gameState == gameStates.END:
-            print("end")
+            end.showEnd()
 
         pygame.display.flip()
         await asyncio.sleep(0)

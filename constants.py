@@ -1,7 +1,7 @@
 import pygame
 import json
 
-DEV_MODE = True
+DEV_MODE = False
 WIDTH, HEIGHT = 900, 600
 FPS = 30
 FPS_SCALING = 30 / FPS
