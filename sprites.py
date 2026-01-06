@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.width = width
         self.height = height
 
-        image = pygame.image.load("assets/crow-crop.png")
+        image = pygame.image.load("assets/crow.png")
 
         self.image = pygame.transform.scale(image, (width, height))
 
