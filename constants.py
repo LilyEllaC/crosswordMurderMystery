@@ -34,19 +34,14 @@ def reevalConstants(coords):
     for coord in coords["bottom"]:
         BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
 
+try:
+    with open("coords.json", "r") as f:
+        existingCoords = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError) as e:
+    print(f"Warning: Could not load coords.json: {e}")
+    existingCoords = {"left": [], "right": [], "top": [], "bottom": []}
 
-d = json.load(open("coords.json"))
-
-reevalConstants(d)
-
-# for coord in d["left"]:
-#     LEFT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-# for coord in d["right"]:
-#     RIGHT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-# for coord in d["top"]:
-#     TOP_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-# for coord in d["bottom"]:
-#     BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+reevalConstants(existingCoords)
 
 # colours
 RED = (255, 0, 0)
