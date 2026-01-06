@@ -5,6 +5,7 @@ import math
 import time
 
 from enum import Enum
+# pylint: disable=no-member
 
 pygame.init()
 import crossword
@@ -16,7 +17,7 @@ running = True
 class gameStates(Enum):
     STARTING_SCREEN = 1
     PLAYING = 2
-    PLAYING_WITH_CROSSWORD_OPEN = 3
+    CROSSWORD = 3
     END = 4
 
 
@@ -85,7 +86,6 @@ def main():
 
                 if (
                     gameState == gameStates.PLAYING
-                    or gameState == gameStates.PLAYING_WITH_CROSSWORD_OPEN
                 ):
                     keys = pygame.key.get_pressed()
 
@@ -97,7 +97,8 @@ def main():
                         addKey("a")
                     if keys[pygame.K_d]:
                         addKey("d")
-
+                if gameState==gameStates.CROSSWORD:
+                    crossword.typing(event.key)
                 move(True)
 
             elif event.type == pygame.KEYUP:
@@ -118,7 +119,7 @@ def main():
             intro.titleScreen()
         elif gameState == gameStates.PLAYING:
             game.show_game()
-        elif gameState == gameStates.PLAYING_WITH_CROSSWORD_OPEN:
+        elif gameState == gameStates.CROSSWORD:
             print("playing with crossword open")
         elif gameState == gameStates.END:
             print("end")
