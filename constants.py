@@ -6,7 +6,7 @@ WIDTH, HEIGHT = 900, 600
 FPS = 30
 FPS_SCALING = 30 / FPS
 GAME_ENDED_EVENT = pygame.USEREVENT + 1
-TIME_IN_SECONDS = 600
+TIME_IN_SECONDS = 900
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -67,6 +67,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (177, 177, 177)
 DARK_GRAY = (100, 100, 100)
+LIGHT_RED = (241, 75, 75)
 
 
 pygame.font.init()

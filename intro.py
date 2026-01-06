@@ -31,7 +31,10 @@ startButton = Button(
     True,
 )
 
-buttons = [startButton, quitButton]
+helpButton=Button(10, const.HEIGHT - 50, 30, 45, "?", const.FONT37, const.LIGHT_RED, const.DARK_RED, False)
+helpButton.textColour = const.BLACK
+
+buttons = [startButton, quitButton, helpButton]
 
 
 def titleScreen():

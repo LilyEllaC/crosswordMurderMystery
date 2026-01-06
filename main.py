@@ -129,7 +129,7 @@ def move(bypassDebounce):
                 game.map.x -= speed
             game.player.set_direction("right")
 
-        if moved and not bypassDebounce:
+        # if moved and not bypassDebounce:
             # TODO: Maybe add long footstep sound here
             # audio.play_sfx("assets/pigeon.ogg")
 
@@ -191,6 +191,8 @@ async def main():
                         audio.play_sfx("assets/pigeon.ogg", 0.3)
                     elif intro.quitButton.isHovered():
                         running = False
+                    elif intro.helpButton.isHovered():
+                        gameState = gameStates.HELP
 
                 if gameState == gameStates.PLAYING:
                     if game.crosswordButton.isHovered():
