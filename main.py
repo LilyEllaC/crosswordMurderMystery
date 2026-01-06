@@ -1,4 +1,4 @@
-import utility
+import datetime
 import constants as const
 import pygame
 import game
@@ -150,10 +150,14 @@ async def main():
             if event.type == pygame.QUIT:
                 running = False
 
+            if event.type == const.GAME_ENDED_EVENT:
+                gameState = gameStates.END
+
             elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 if gameState == gameStates.STARTING_SCREEN:
                     if intro.startButton.isHovered():
                         gameState = gameStates.PLAYING
+                        game.startTime = datetime.datetime.now()
                     elif intro.quitButton.isHovered():
                         running = False
 
