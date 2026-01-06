@@ -471,7 +471,7 @@ def showQuestions():
             "14. What is on the edge of the sink?", font, colour, x, y + gap * 5
         )  # candle Stick
         utility.toScreenTopLeft(
-            "16. What is on the table in the dining room", font, colour, x, y + gap * 6
+            "16. What is hidden beside a chair?", font, colour, x, y + gap * 6
         )  # rope??
         utility.toScreenTopLeft(
             "17. What colour is the carpet in the hallways?",
@@ -516,7 +516,7 @@ def showQuestions():
             "7. What colour is the leftmost book on the ", font, colour, x, y + gap * 5
         )
         utility.toScreenTopLeft(
-            "   living room bookshelf?", font, colour, x, y + gap * 6
+            "   top shelf of the living room bookshelf?", font, colour, x, y + gap * 6
         )
         utility.toScreenTopLeft(
             "8. What is on the stove in the kitchen", font, colour, x, y + gap * 7
