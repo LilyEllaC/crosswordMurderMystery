@@ -193,10 +193,12 @@ async def main():
                 if gameState == gameStates.WON:
                     if won.backButton.isHovered():
                         gameState = gameStates.STARTING_SCREEN
+                        crossword.textAndBoxes.resetLetters()
                         audio.play_theme("assets/clue.ogg")
                 if gameState == gameStates.LOSS:
                     if loss.backButton.isHovered():
                         loss.resetVariables()
+                        crossword.textAndBoxes.resetLetters()
                         gameState = gameStates.STARTING_SCREEN
                         audio.play_theme("assets/clue.ogg")
 
@@ -317,7 +319,6 @@ async def main():
                                     indent=4,
                                 )
 
-                            print("SAVED TO FILE")
                     if keys[pygame.K_t]:
                         game.player.toggle_direction()
 
@@ -362,7 +363,6 @@ async def main():
 
         if gameState == gameStates.STARTING_SCREEN:
             intro.titleScreen()
-            print("start")
         elif gameState == gameStates.PLAYING:
             game.showGame()
         elif gameState == gameStates.CROSSWORD:

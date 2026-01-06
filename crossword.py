@@ -20,20 +20,6 @@ def drawOutline(x,y):
     rect=(x-1, y-1, 26, 29.5)
     pygame.draw.rect(const.screen, const.BLACK, rect, 3)
 
-class TextAndBoxes():
-    def __init__(self):
-        self.boxList=[]
-        self.textList=[]
-        #size=93
-        gap=28.5
-        width=0
-        xPos=[]
-        yPos=[]
-        normalColour=0
-        colour=2
-        for i in range (0,20):
-            xPos.append(11.5-width+27.6*i)
-            yPos.append(26-width+29*i)
 
 class TextAndBoxes:
     def __init__(self):
@@ -391,6 +377,10 @@ class TextAndBoxes:
             if box.special:
                 box.colourNum = 2
 
+    def resetLetters(self):
+        for i in range(0, len(self.boxList)):
+            self.textList[i].letter=" "
+
 
 class Boxes:
     def __init__(self, x, y, colourNum):
@@ -445,6 +435,8 @@ class Letters:
         else:
             colour = const.RED
         utility.toScreen(self.letter, self.font, colour, self.x, self.y)
+
+
 
 
 def showQuestions():
