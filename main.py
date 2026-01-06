@@ -21,6 +21,7 @@ import crossword
 
 # running variable so it stops
 running = True
+clock=pygame.time.Clock()
 
 
 class gameStates(Enum):
@@ -282,6 +283,7 @@ async def main():
             end.showEnd()
 
         pygame.display.flip()
+        clock.tick(const.FPS)
         await asyncio.sleep(0)
 
 
