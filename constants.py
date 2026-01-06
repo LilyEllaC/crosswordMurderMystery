@@ -1,7 +1,7 @@
 import pygame
 import json
 
-DEV_MODE = False
+DEV_MODE = True
 WIDTH, HEIGHT = 900, 600
 FPS = 30
 FPS_SCALING = 30 / FPS
@@ -16,15 +16,35 @@ RIGHT_COORDS = list()
 TOP_COORDS = list()
 BOTTOM_COORDS = list()
 
+
+def reevalConstants(coords):
+    LEFT_COORDS.clear()
+    RIGHT_COORDS.clear()
+    TOP_COORDS.clear()
+    BOTTOM_COORDS.clear()
+
+    for coord in coords["left"]:
+        LEFT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+    for coord in coords["right"]:
+        RIGHT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+    for coord in coords["top"]:
+        TOP_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+    for coord in coords["bottom"]:
+        BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+
+
 d = json.load(open("coords.json"))
-for coord in d["left"]:
-    LEFT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-for coord in d["right"]:
-    RIGHT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-for coord in d["top"]:
-    TOP_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-for coord in d["bottom"]:
-    BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+
+reevalConstants(d)
+
+# for coord in d["left"]:
+#     LEFT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+# for coord in d["right"]:
+#     RIGHT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+# for coord in d["top"]:
+#     TOP_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
+# for coord in d["bottom"]:
+#     BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
 
 # colours
 RED = (255, 0, 0)

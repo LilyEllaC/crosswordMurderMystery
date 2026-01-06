@@ -232,6 +232,14 @@ async def main():
                                         "absolute": [game.map.x, game.map.y],
                                     }
                                 )
+                    if keys[pygame.K_r]:
+                        if const.DEV_MODE:
+                            const.reevalConstants({
+                                "left": leftCoords,
+                                "right": rightCoords,
+                                "top": topCoords,
+                                "bottom": bottomCoords,
+                            })
                     if keys[pygame.K_p]:
                         if const.DEV_MODE:
                             with open("coords.json", "w") as f:
