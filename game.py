@@ -2,8 +2,8 @@ import constants as const
 import pygame
 from sprites import Objects, Player
 
-map = Objects(18, 32, 992 * 2, 736 * 2, "assets/map.png")
-player = Player(const.WIDTH / 2, const.HEIGHT / 2, 32, 32)
+map = Objects(0, 6, 992 * 2, 736 * 2, "assets/map.png")
+player = Player(const.WIDTH / 2, const.HEIGHT / 2, 64, 64)
 
 leftSquares = []
 rightSquares = []
