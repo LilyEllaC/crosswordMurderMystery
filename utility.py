@@ -24,7 +24,8 @@ def imageToScreen(imageName, x, y, width, height):
     image = pygame.transform.scale(image, (width, height))
     const.screen.blit(image, (x,y))
 
-def isAllowedToMoveToDest(destinationPos):
+# directions can be top, bottom, right, left
+def isAllowedToMoveToDest(destinationPos, direction):
     for x in const.BLOCKED_POSITIONS:
         if x[0] == destinationPos[0] and x[1] == destinationPos[1]:
             return False

@@ -92,25 +92,25 @@ def move(bypassDebounce):
         if "w" in keysDown:
             newPos = (game.map.x, game.map.y + speed)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest(newPos, "top"):
                 game.map.y += speed
 
         if "s" in keysDown:
             newPos = (game.map.x, game.map.y - speed)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest(newPos, "bottom"):
                 game.map.y -= speed
         if "a" in keysDown:
             newPos = (game.map.x + speed, game.map.y)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest(newPos, "left"):
                 game.map.x += speed
 
             game.player.set_direction("left")
         if "d" in keysDown:
             newPos = (game.map.x - speed, game.map.y)
 
-            if utility.isAllowedToMoveToDest(newPos):
+            if utility.isAllowedToMoveToDest(newPos, "right"):
                 game.map.x -= speed
             game.player.set_direction("right")
 
