@@ -41,6 +41,7 @@ keysDown = []
 
 lastMoveTS = 0
 moveDelay = 150
+enteredHelpMenuFromMenu = False
 
 # DEV #####
 
@@ -157,7 +158,7 @@ def addToSquare():
 async def main():
     pygame.display.set_caption("Crossword Murder Mystery")
 
-    global running
+    global running, enteredHelpMenuFromMenu
 
     gameState = gameStates.STARTING_SCREEN
 
@@ -193,6 +194,7 @@ async def main():
                         running = False
                     elif intro.helpButton.isHovered():
                         gameState = gameStates.HELP
+                        enteredHelpMenuFromMenu = True
 
                 if gameState == gameStates.PLAYING:
                     if game.crosswordButton.isHovered():
@@ -222,7 +224,11 @@ async def main():
 
                 if gameState == gameStates.HELP:
                     if help.backButton.isHovered():
-                        gameState = gameStates.PLAYING
+                        if enteredHelpMenuFromMenu:
+                            gameState = gameStates.STARTING_SCREEN
+                            enteredHelpMenuFromMenu = False
+                        else:
+                            gameState = gameStates.PLAYING
 
             if event.type == pygame.KEYDOWN:
                 if gameState == gameStates.PLAYING:
