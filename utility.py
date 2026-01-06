@@ -48,29 +48,29 @@ def findCoordIndex(coords):
 
 # directions can be top, bottom, right, left
 def isAllowedToMoveToDest(direction):
-    found = None
+    restrictedDirections = []
 
     for coord in const.LEFT_COORDS:
-        if [game.map.x, game.map.y] == coord["absolute"]:
-            found = "left"
+        if (game.map.x, game.map.y) == (coord[0], coord[1]):
+            restrictedDirections.append("left")
             break
 
     for coord in const.RIGHT_COORDS:
-        if [game.map.x, game.map.y] == coord["absolute"]:
-            found = "right"
+        if (game.map.x, game.map.y) == (coord[0], coord[1]):
+            restrictedDirections.append("right")
             break
 
     for coord in const.TOP_COORDS:
-        if [game.map.x, game.map.y] == coord["absolute"]:
-            found = "top"
+        if (game.map.x, game.map.y) == (coord[0], coord[1]):
+            restrictedDirections.append("top")
             break
 
     for coord in const.BOTTOM_COORDS:
-        if [game.map.x, game.map.y] == coord["absolute"]:
-            found = "bottom"
+        if (game.map.x, game.map.y) == (coord[0], coord[1]):
+            restrictedDirections.append("bottom")
             break
 
-    if found == direction:
+    if direction in restrictedDirections:
         return False
 
     return True
