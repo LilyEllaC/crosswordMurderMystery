@@ -9,7 +9,7 @@ pygame.init()
 gameButton=Button(10, 10, 140, 50, "Game", const.FONT37, const.RED, const.DARK_RED, True)
 
 def isNumber(digit):
-    for i in range(0,9):
+    for i in range(0,10):
         if digit==str(i):
             return True
 
@@ -23,7 +23,7 @@ class TextAndBoxes():
         xPos=[]
         yPos=[]
         normalColour=0
-        colour=3
+        colour=2
         for i in range (0,20):
             xPos.append(11.5-width+27.6*i)
             yPos.append(26-width+29*i)
@@ -39,7 +39,7 @@ class TextAndBoxes():
             self.textList.append(Letters("A", xPos[15], yPos[2]))
             self.boxList.append(Boxes(xPos[15], yPos[2], normalColour))
             self.textList.append(Letters("S", xPos[15], yPos[3]))
-            self.boxList.append(Boxes(xPos[15], yPos[3], normalColour))
+            self.boxList.append(Boxes(xPos[15], yPos[3], colour))
             self.textList.append(Letters("S", xPos[15], yPos[4]))
             self.boxList.append(Boxes(xPos[15], yPos[4], normalColour))
             self.textList.append(Letters("E", xPos[15], yPos[5]))
@@ -63,11 +63,11 @@ class TextAndBoxes():
             self.textList.append(Letters("I", xPos[11], yPos[8]))
             self.boxList.append(Boxes(xPos[11], yPos[8], normalColour))
             self.textList.append(Letters("T", xPos[11], yPos[9]))
-            self.boxList.append(Boxes(xPos[11], yPos[9], normalColour))
+            self.boxList.append(Boxes(xPos[11], yPos[9], colour))
             self.textList.append(Letters("C", xPos[11], yPos[10]))
             self.boxList.append(Boxes(xPos[11], yPos[10], normalColour))
             self.textList.append(Letters("H", xPos[11], yPos[11]))
-            self.boxList.append(Boxes(xPos[11], yPos[11], normalColour))
+            self.boxList.append(Boxes(xPos[11], yPos[11], colour))
             self.textList.append(Letters("E", xPos[11], yPos[12]))
             self.boxList.append(Boxes(xPos[11], yPos[12], normalColour))
             self.textList.append(Letters("N", xPos[11], yPos[13]))
@@ -119,14 +119,14 @@ class TextAndBoxes():
             self.textList.append(Letters("I", xPos[14], yPos[11]))
             self.boxList.append(Boxes(xPos[14], yPos[11], normalColour))
             self.textList.append(Letters("P", xPos[14], yPos[12]))
-            self.boxList.append(Boxes(xPos[14], yPos[12], normalColour))
+            self.boxList.append(Boxes(xPos[14], yPos[12], colour))
             self.textList.append(Letters("E", xPos[14], yPos[13]))
             self.boxList.append(Boxes(xPos[14], yPos[13], normalColour))
             #pink
             self.textList.append(Letters("P", xPos[19], yPos[10]))
             self.boxList.append(Boxes(xPos[19], yPos[10], normalColour))
             self.textList.append(Letters("I", xPos[19], yPos[11]))
-            self.boxList.append(Boxes(xPos[19], yPos[11], normalColour))
+            self.boxList.append(Boxes(xPos[19], yPos[11], colour))
             self.textList.append(Letters("N", xPos[19], yPos[12]))
             self.boxList.append(Boxes(xPos[19], yPos[12], normalColour))
             self.textList.append(Letters("K", xPos[19], yPos[13]))
@@ -137,7 +137,7 @@ class TextAndBoxes():
             self.textList.append(Letters("I", xPos[1], yPos[14]))
             self.boxList.append(Boxes(xPos[1], yPos[14], normalColour))
             self.textList.append(Letters("R", xPos[1], yPos[15]))
-            self.boxList.append(Boxes(xPos[1], yPos[15], normalColour))
+            self.boxList.append(Boxes(xPos[1], yPos[15], colour))
             self.textList.append(Letters("R", xPos[1], yPos[16]))
             self.boxList.append(Boxes(xPos[1], yPos[16], normalColour))
             self.textList.append(Letters("O", xPos[1], yPos[17]))
@@ -154,7 +154,7 @@ class TextAndBoxes():
             self.textList.append(Letters("L", xPos[10], yPos[16]))
             self.boxList.append(Boxes(xPos[10], yPos[16], normalColour))
             self.textList.append(Letters("E", xPos[10], yPos[17]))
-            self.boxList.append(Boxes(xPos[10], yPos[17], normalColour))
+            self.boxList.append(Boxes(xPos[10], yPos[17], colour))
             self.textList.append(Letters("S", xPos[10], yPos[18]))
             self.boxList.append(Boxes(xPos[10], yPos[18], normalColour))
             
@@ -195,7 +195,7 @@ class TextAndBoxes():
             self.textList.append(Letters("O", xPos[7], yPos[10]))
             self.boxList.append(Boxes(xPos[7], yPos[10], normalColour))
             self.textList.append(Letters("C", xPos[8], yPos[10]))
-            self.boxList.append(Boxes(xPos[8], yPos[10], normalColour))
+            self.boxList.append(Boxes(xPos[8], yPos[10], colour))
             self.textList.append(Letters("L", xPos[9], yPos[10]))
             self.boxList.append(Boxes(xPos[9], yPos[10], normalColour))
             self.textList.append(Letters("O", xPos[10], yPos[10]))
@@ -212,7 +212,7 @@ class TextAndBoxes():
             self.textList.append(Letters("U", xPos[2], yPos[11]))
             self.boxList.append(Boxes(xPos[2], yPos[11], normalColour))
             self.textList.append(Letters("R", xPos[3], yPos[11]))
-            self.boxList.append(Boxes(xPos[3], yPos[11], normalColour))
+            self.boxList.append(Boxes(xPos[3], yPos[11], colour))
             #tiles
             self.textList.append(Letters("T", xPos[13], yPos[11]))
             self.boxList.append(Boxes(xPos[13], yPos[11], normalColour))
@@ -251,7 +251,7 @@ class TextAndBoxes():
             self.textList.append(Letters("R", xPos[1], yPos[16]))
             self.boxList.append(Boxes(xPos[1], yPos[16], normalColour))
             self.textList.append(Letters("O", xPos[2], yPos[16]))
-            self.boxList.append(Boxes(xPos[2], yPos[16], normalColour))
+            self.boxList.append(Boxes(xPos[2], yPos[16], colour))
             self.textList.append(Letters("P", xPos[3], yPos[16]))
             self.boxList.append(Boxes(xPos[3], yPos[16], normalColour))
             self.textList.append(Letters("E", xPos[4], yPos[16]))
@@ -275,10 +275,10 @@ class TextAndBoxes():
             self.textList.append(Letters("C", xPos[4], yPos[18]))
             self.boxList.append(Boxes(xPos[4], yPos[18], normalColour))
             self.textList.append(Letters("H", xPos[5], yPos[18]))
-            self.boxList.append(Boxes(xPos[5], yPos[18], normalColour))
+            self.boxList.append(Boxes(xPos[5], yPos[18], colour))
             
             self.textList.append(Letters("3", xPos[11], yPos[5]))
-            self.textList.append(Letters("4", xPos[9], yPos[8]))
+            self.textList.append(Letters("6", xPos[9], yPos[8]))
             self.textList.append(Letters("11", xPos[0], yPos[11]))
             self.textList.append(Letters("12", xPos[13], yPos[11]))
             self.textList.append(Letters("14", xPos[9], yPos[13]))
@@ -288,14 +288,14 @@ class TextAndBoxes():
             self.textList.append(Letters("1", xPos[15], yPos[0]))
             self.textList.append(Letters("2", xPos[13], yPos[4]))
             self.textList.append(Letters("4", xPos[11], yPos[7]))
-            self.textList.append(Letters("6", xPos[6], yPos[8]))
+            self.textList.append(Letters("5", xPos[6], yPos[8]))
             self.textList.append(Letters("7", xPos[16], yPos[8]))
             self.textList.append(Letters("8", xPos[3], yPos[10]))
             self.textList.append(Letters("9", xPos[14], yPos[10]))
             self.textList.append(Letters("10", xPos[19], yPos[10]))
             self.textList.append(Letters("13", xPos[1], yPos[13]))
             self.textList.append(Letters("15", xPos[10], yPos[13]))
-
+            print(xPos[14], yPos[10])
 
 
     def draw(self):
@@ -309,11 +309,24 @@ class TextAndBoxes():
         for i in range(len(self.boxList), len(self.textList)):
             self.textList[i].draw()
 
+    def checkIfCrosswordFinished(self):
+        for text in self.textList:
+            if text.letter!=text.correctLetter:
+                return False
+        return True
+    
+    def showSpecial(self):
+        for box in self.boxList:
+            if box.special:
+                box.colourNum=2
+
 class Boxes():
     def __init__(self, x, y, colourNum):
         self.x=x
         self.y=y
-        self.colourNum=colourNum
+        self.special=colourNum==2
+        
+        self.colourNum=0
         self.colours=[const.WHITE, const.GRAY, const.RED, const.DARK_RED]
         self.colour=self.colours[colourNum]
         self.rect=(x, y, 24, 27.5)
@@ -335,7 +348,7 @@ class Boxes():
 
 class Letters():
     def __init__(self, correctLetter, x, y):
-        self.letter=" "
+        self.letter=correctLetter
         self.font=const.FONT20
         self.correctLetter=correctLetter
         self.x=x+14
@@ -369,12 +382,13 @@ def showQuestions():
         utility.toScreenTopLeft("3. What is in the victim's hand?", font, colour, x, y+gap*0)#flower
         utility.toScreenTopLeft("6. What is on the island in the kitchen?", font, colour, x, y+gap*1)
         utility.toScreenTopLeft("8. What time is on the broken clock?", font, colour, x, y+gap*2)
-        utility.toScreenTopLeft("11. How any flowersare in the red pot?", font, colour, x, y+gap*3)
+        utility.toScreenTopLeft("11. How many flowers are in the pot?", font, colour, x, y+gap*3)
         utility.toScreenTopLeft("12. What is the floor of the bathroom made of?", font, colour, x, y+gap*4)
         utility.toScreenTopLeft("14. What is on the edge of the sink?", font, colour, x, y+gap*5)#candle Stick
         utility.toScreenTopLeft("16. What is on the table in the dining room", font, colour, x, y+gap*6)#rope??
         utility.toScreenTopLeft("17. What colour is the carpet in the hallways?", font, colour, x, y+gap*7)
         utility.toScreenTopLeft("18. What tool is on the dining table?", font, colour, x, y+gap*8)#wrench
+
         #downs
         y=345
         utility.toScreenTopLeft("Down", const.FONT25, colour, x, 315)
@@ -398,11 +412,12 @@ def showCrossword():
     const.screen.fill(const.WHITE)
     utility.imageToScreen("crossword.png", 10, 25, 550, 550)
     showQuestions()
-    #utility.imageToScreen("across.png", 570, 25, 320, 240)
-    #utility.imageToScreen("downs.png", 570, 320, 325, 255)
     textAndBoxes.draw()
+    if textAndBoxes.checkIfCrosswordFinished():
+        textAndBoxes.showSpecial()
     gameButton.draw()
     gameButton.isHovered()
+
 
 def typing(event):
     #getting them to be allowed to type
