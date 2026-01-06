@@ -97,7 +97,7 @@ def main():
                         addKey("a")
                     if keys[pygame.K_d]:
                         addKey("d")
-                if gameState==gameStates.CROSSWORD:
+                if gameState==gameStates.CROSSWORD and event.type==pygame.KEYDOWN:
                     crossword.typing(event)
                 move(True)
 
@@ -120,7 +120,7 @@ def main():
         elif gameState == gameStates.PLAYING:
             game.show_game()
         elif gameState == gameStates.CROSSWORD:
-            print("playing with crossword open")
+            crossword.showCrossword()
         elif gameState == gameStates.END:
             print("end")
 

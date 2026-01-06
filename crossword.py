@@ -6,15 +6,6 @@ import utility
 pygame.init()
 
 
-def typing(event):
-    #getting them to be allowed to type
-    
-    if event.key==pygame.K_BACKSPACE:
-        letter=letter[:-1]
-    else:
-        letter+=event.unicode
-
-
 class TextAndBoxes():
     def __init__(self):
         self.boxList=[]
@@ -283,6 +274,8 @@ class TextAndBoxes():
         for i in range(0, len(self.boxList)):
             self.boxList[i].hoveredOver()
             self.textList[i].draw()
+            if self.boxList[i].colourNum%2==1:
+                self.textList[i].mouseOver=True
 
 
 class Boxes():
@@ -314,15 +307,17 @@ class Letters():
     def __init__(self, correctLetter, x, y):
         self.letter=" "
         self.correctLetter=correctLetter
-        self.x=x-14
-        self.y=y-14
+        self.x=x
+        self.y=y
+        self.mouseOver=False
 
     def draw(self):
+        self.mouseOver=False
         if self.letter==self.correctLetter:
             colour=const.BLACK
         else: 
             colour=const.RED
-        utility.toScreen(self.letter, const.FONT20, colour, self.x, self.y)
+        utility.toScreen(self.letter, const.FONT20, colour, self.x+14, self.y+14)
 
 
 textAndBoxes=TextAndBoxes()
@@ -332,7 +327,19 @@ def showCrossword():
     utility.imageToScreen("crossword.png", 10, 25, 550, 550)
     utility.imageToScreen("across.png", 570, 25, 320, 240)
     utility.imageToScreen("downs.png", 570, 320, 325, 255)
-    #drawBoxes(92, 315, const.RED)
     textAndBoxes.draw()
+    
+
+
+def typing(event):
+    #getting them to be allowed to type
+    for text in textAndBoxes.textList:
+        if text.mouseOver:
+            if event.key==pygame.K_BACKSPACE:
+                text.letter=" "
+            elif text.letter==" ":
+                text.letter=event.unicode.upper()
+            text=text.letter
+            
 
     
