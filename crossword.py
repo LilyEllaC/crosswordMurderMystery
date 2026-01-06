@@ -357,8 +357,8 @@ class TextAndBoxes():
             
 
     def checkIfCrosswordFinished(self):
-        for text in self.textList:
-            if text.letter!=text.correctLetter:
+        for i in range(0,len(self.textList)-29):
+            if self.textList[i].letter!=self.textList[i].correctLetter:
                 return False
         return True
     
