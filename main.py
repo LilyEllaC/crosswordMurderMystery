@@ -84,6 +84,8 @@ def removeKey(key):
 def move(bypassDebounce):
     global lastMoveTS
 
+    audio = audio_manager.AudioManager()
+
     time_ms = time.time_ns() // 1_000_000
 
     if bypassDebounce or time_ms - lastMoveTS > moveDelay:
@@ -91,23 +93,28 @@ def move(bypassDebounce):
 
         speed = 32
 
+        moved = False
+
         # if ("w" in keysDown or "s" in keysDown) and (
         #     "d" in keysDown or "a" in keysDown
         # ):
         #     speed = speed / math.sqrt(2)
 
         if "w" in keysDown:
+            moved = True
             # newPos = (game.map.x, game.map.y + speed)
 
             if utility.isAllowedToMoveToDest("top"):
                 game.map.y += speed
 
         if "s" in keysDown:
+            moved = True
             # newPos = (game.map.x, game.map.y - speed)
 
             if utility.isAllowedToMoveToDest("bottom"):
                 game.map.y -= speed
         if "a" in keysDown:
+            moved = True
             # newPos = (game.map.x + speed, game.map.y)
 
             if utility.isAllowedToMoveToDest("left"):
@@ -115,11 +122,16 @@ def move(bypassDebounce):
 
             game.player.set_direction("left")
         if "d" in keysDown:
+            moved = True
             # newPos = (game.map.x - speed, game.map.y)
 
             if utility.isAllowedToMoveToDest("right"):
                 game.map.x -= speed
             game.player.set_direction("right")
+
+        # if moved and not bypassDebounce:
+            # TODO: Maybe add long footstep sound here
+            # audio.play_sfx("assets/pigeon.ogg")
 
 
 def addToSquare():
@@ -165,10 +177,9 @@ async def main():
                 gameState = gameStates.LOSS
             if event.type == const.GAME_WON_EVENT:
                 gameState = gameStates.WON"""
-            #if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
-            #if event.type == const.GAME_ENDED_EVENT:
-             #   gameState = gameStates.END
-                
+            # if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+            # if event.type == const.GAME_ENDED_EVENT:
+            #   gameState = gameStates.END
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if gameState == gameStates.STARTING_SCREEN:
@@ -180,6 +191,8 @@ async def main():
                         audio.play_sfx("assets/pigeon.ogg", 0.3)
                     elif intro.quitButton.isHovered():
                         running = False
+                    elif intro.helpButton.isHovered():
+                        gameState = gameStates.HELP
 
                 if gameState == gameStates.PLAYING:
                     if game.crosswordButton.isHovered():
@@ -189,7 +202,7 @@ async def main():
                     if game.helpButton.isHovered():
                         gameState = gameStates.HELP
                         continue
-                #restarting the game from won and loss
+                # restarting the game from won and loss
                 if gameState == gameStates.WON:
                     if won.backButton.isHovered():
                         gameState = gameStates.STARTING_SCREEN
@@ -202,7 +215,7 @@ async def main():
                         gameState = gameStates.STARTING_SCREEN
                         audio.play_theme("assets/clue.ogg")
 
-                #crossword and help stuff
+                # crossword and help stuff
                 if gameState == gameStates.CROSSWORD:
                     if crossword.gameButton.isHovered():
                         gameState = gameStates.PLAYING
@@ -220,11 +233,14 @@ async def main():
                         gameState = gameStates.CROSSWORD
                         continue
 
-                    if game.helpButton.isHovered() and event.type==pygame.MOUSEBUTTONDOWN:
-                        gameState=gameStates.HELP
+                    if (
+                        game.helpButton.isHovered()
+                        and event.type == pygame.MOUSEBUTTONDOWN
+                    ):
+                        gameState = gameStates.HELP
                         continue
-                    #if game.s==1:
-                     #   gameState=gameStates.LOSS
+                    # if game.s==1:
+                    #   gameState=gameStates.LOSS
                     keys = pygame.key.get_pressed()
 
                     relative_x = (
@@ -332,12 +348,13 @@ async def main():
                         and crossword.gameButton.isHovered
                     ):
                         gameState = gameStates.PLAYING
-                   
-
 
                 if gameState == gameStates.HELP:
-                    if event.type == pygame.MOUSEBUTTONDOWN and help.backButton.isHovered():
-                        gameState=gameStates.PLAYING
+                    if (
+                        event.type == pygame.MOUSEBUTTONDOWN
+                        and help.backButton.isHovered()
+                    ):
+                        gameState = gameStates.PLAYING
 
                 move(True)
 
@@ -352,10 +369,13 @@ async def main():
                     removeKey("a")
                 if not keys[pygame.K_d]:
                     removeKey("d")
-        if crossword.textAndBoxes.checkIfNameCorrect() and gameState==gameStates.CROSSWORD:
-            gameState=gameStates.WON
+        if (
+            crossword.textAndBoxes.checkIfNameCorrect()
+            and gameState == gameStates.CROSSWORD
+        ):
+            gameState = gameStates.WON
         if game.timing():
-            gameState=gameStates.LOSS
+            gameState = gameStates.LOSS
             audio.stop_theme()
             audio.play_sfx("assets/grave.ogg")
 
