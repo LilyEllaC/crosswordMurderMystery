@@ -120,59 +120,59 @@ class Button:
         return False
 
 
-# sprites for different rooms #USELESS
-def spriteClues():
-    def __init__(self):
-        self.fryingPan = Objects(
-            const.WIDTH // 2, const.HEIGHT // 2, 50, 50, "fryingPan.png"
-        )
-        self.fruitBowl = Objects(
-            const.WIDTH // 2 + 100, const.HEIGHT // 2, 50, 50, "fruitBowl.png"
-        )
-        self.flowerPot = Objects(
-            const.WIDTH // 2 - 100, const.HEIGHT // 2, 50, 50, "flowerPot.png"
-        )
-        self.flowers = Objects(
-            const.WIDTH // 2 + 200, const.HEIGHT // 2, 50, 50, "flowers.png"
-        )
-        self.leadPipe = Objects(
-            const.WIDTH // 2 - 200, const.HEIGHT // 2, 50, 50, "pipe.png"
-        )
-        self.leadPipe = Objects(
-            const.WIDTH // 2 - 200, const.HEIGHT // 2, 50, 50, "pipe.png"
-        )
-        self.glasses = Objects(
-            const.WIDTH // 2 - 300, const.HEIGHT // 2, 50, 50, "glasses.png"
-        )
-        self.candle = Objects(
-            const.WIDTH // 2 + 300, const.HEIGHT // 2, 50, 50, "candleStick.png"
-        )
-        self.brokenMirror = Objects(
-            const.WIDTH // 2 - 400, const.HEIGHT // 2, 50, 50, "mirrorPieces.png"
-        )
-        self.wrench = Objects(
-            const.WIDTH // 2 + 400, const.HEIGHT // 2, 50, 50, "wrench.png"
-        )
-        self.rope = Objects(
-            const.WIDTH // 2, const.HEIGHT // 2 - 100, 50, 50, "rope.png"
-        )
-        self.clock = Objects(
-            const.WIDTH // 2, const.HEIGHT // 2 + 100, 50, 50, "brokenClock.png"
-        )
+# # sprites for different rooms #USELESS
+# def spriteClues():
+#     def __init__(self):
+#         self.fryingPan = Objects(
+#             const.WIDTH // 2, const.HEIGHT // 2, 50, 50, "fryingPan.png"
+#         )
+#         self.fruitBowl = Objects(
+#             const.WIDTH // 2 + 100, const.HEIGHT // 2, 50, 50, "fruitBowl.png"
+#         )
+#         self.flowerPot = Objects(
+#             const.WIDTH // 2 - 100, const.HEIGHT // 2, 50, 50, "flowerPot.png"
+#         )
+#         self.flowers = Objects(
+#             const.WIDTH // 2 + 200, const.HEIGHT // 2, 50, 50, "flowers.png"
+#         )
+#         self.leadPipe = Objects(
+#             const.WIDTH // 2 - 200, const.HEIGHT // 2, 50, 50, "pipe.png"
+#         )
+#         self.leadPipe = Objects(
+#             const.WIDTH // 2 - 200, const.HEIGHT // 2, 50, 50, "pipe.png"
+#         )
+#         self.glasses = Objects(
+#             const.WIDTH // 2 - 300, const.HEIGHT // 2, 50, 50, "glasses.png"
+#         )
+#         self.candle = Objects(
+#             const.WIDTH // 2 + 300, const.HEIGHT // 2, 50, 50, "candleStick.png"
+#         )
+#         self.brokenMirror = Objects(
+#             const.WIDTH // 2 - 400, const.HEIGHT // 2, 50, 50, "mirrorPieces.png"
+#         )
+#         self.wrench = Objects(
+#             const.WIDTH // 2 + 400, const.HEIGHT // 2, 50, 50, "wrench.png"
+#         )
+#         self.rope = Objects(
+#             const.WIDTH // 2, const.HEIGHT // 2 - 100, 50, 50, "rope.png"
+#         )
+#         self.clock = Objects(
+#             const.WIDTH // 2, const.HEIGHT // 2 + 100, 50, 50, "brokenClock.png"
+#         )
 
-        # creating sprite groups
-        self.kitchenSprites = pygame.sprite.Group()
-        self.bathroomSprites = pygame.sprite.Group()
-        self.livingRoomSprites = pygame.sprite.Group()
-        self.diningRoomSprites = pygame.sprite.Group()
-        self.bedroomSprites = pygame.sprite.Group()
-        self.gardenSprites = pygame.sprite.Group()
-        self.houseSprites = pygame.sprite.Group()
+#         # creating sprite groups
+#         self.kitchenSprites = pygame.sprite.Group()
+#         self.bathroomSprites = pygame.sprite.Group()
+#         self.livingRoomSprites = pygame.sprite.Group()
+#         self.diningRoomSprites = pygame.sprite.Group()
+#         self.bedroomSprites = pygame.sprite.Group()
+#         self.gardenSprites = pygame.sprite.Group()
+#         self.houseSprites = pygame.sprite.Group()
 
-        # adding
-        self.kitchenSprite.add(self.fryingPan, self.fruitBowl)
-        self.bathroomSprite.add(self.candleStick, self.brokenMirror)
-        self.livingRoomSprites.add(self.glasses)
-        self.diningRoomSprites.add(self.wrench, self.rope)
-        self.bedroomSprites.add(self.clock)
-        self.gardenSprites.add(self.flowerPot, self.flowers)
+#         # adding
+#         self.kitchenSprite.add(self.fryingPan, self.fruitBowl)
+#         self.bathroomSprite.add(self.candleStick, self.brokenMirror)
+#         self.livingRoomSprites.add(self.glasses)
+#         self.diningRoomSprites.add(self.wrench, self.rope)
+#         self.bedroomSprites.add(self.clock)
+#         self.gardenSprites.add(self.flowerPot, self.flowers)
