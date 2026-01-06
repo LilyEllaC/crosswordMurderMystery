@@ -13,6 +13,10 @@ def isNumber(digit):
         if digit==str(i):
             return True
 
+def drawOutline(x,y):
+    rect=(x-1, y-1, 26, 29.5)
+    pygame.draw.rect(const.screen, const.BLACK, rect, 3)
+
 class TextAndBoxes():
     def __init__(self):
         self.boxList=[]
@@ -276,7 +280,36 @@ class TextAndBoxes():
             self.boxList.append(Boxes(xPos[4], yPos[18], normalColour))
             self.textList.append(Letters("H", xPos[5], yPos[18]))
             self.boxList.append(Boxes(xPos[5], yPos[18], colour))
+        if True:
+            #solution/murderer's name:
+            yPosition=3
+            self.yPosition=yPosition
+            self.xPos=xPos
+            self.yPos=yPos
+            self.textList.append(Letters("C", xPos[0], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[0], yPos[yPosition], normalColour))
+            self.textList.append(Letters("H", xPos[1], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[1], yPos[yPosition], normalColour))
+            self.textList.append(Letters("R", xPos[2], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[2], yPos[yPosition], normalColour))
+            self.textList.append(Letters("I", xPos[3], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[3], yPos[yPosition], normalColour))
+            self.textList.append(Letters("S", xPos[4], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[4], yPos[yPosition], normalColour))
+            self.textList.append(Letters("T", xPos[5], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[5], yPos[yPosition], normalColour))
+            self.textList.append(Letters("O", xPos[6], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[6], yPos[yPosition], normalColour))
+            self.textList.append(Letters("P", xPos[7], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[7], yPos[yPosition], normalColour))
+            self.textList.append(Letters("H", xPos[8], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[8], yPos[yPosition], normalColour))
+            self.textList.append(Letters("E", xPos[9], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[9], yPos[yPosition], normalColour))
+            self.textList.append(Letters("R", xPos[10], yPos[yPosition]))
+            self.boxList.append(Boxes(xPos[10], yPos[yPosition], normalColour))
             
+            #numbers
             self.textList.append(Letters("3", xPos[11], yPos[5]))
             self.textList.append(Letters("6", xPos[9], yPos[8]))
             self.textList.append(Letters("11", xPos[0], yPos[11]))
@@ -295,19 +328,33 @@ class TextAndBoxes():
             self.textList.append(Letters("10", xPos[19], yPos[10]))
             self.textList.append(Letters("13", xPos[1], yPos[13]))
             self.textList.append(Letters("15", xPos[10], yPos[13]))
-            print(xPos[14], yPos[10])
 
+            
+            
+    def outlines(self):
+        drawOutline(self.xPos[0], self.yPos[self.yPosition])
+        drawOutline(self.xPos[1], self.yPos[self.yPosition])
+        drawOutline(self.xPos[2], self.yPos[self.yPosition])
+        drawOutline(self.xPos[3], self.yPos[self.yPosition])
+        drawOutline(self.xPos[4], self.yPos[self.yPosition])
+        drawOutline(self.xPos[5], self.yPos[self.yPosition])
+        drawOutline(self.xPos[6], self.yPos[self.yPosition])
+        drawOutline(self.xPos[7], self.yPos[self.yPosition])
+        drawOutline(self.xPos[8], self.yPos[self.yPosition])
+        drawOutline(self.xPos[9], self.yPos[self.yPosition])
+        drawOutline(self.xPos[10], self.yPos[self.yPosition])
 
     def draw(self):
         for i in range(0, len(self.boxList)):
             self.boxList[i].hoveredOver()
             self.textList[i].draw()
-            if self.boxList[i].colourNum%2==1:
+            if self.boxList[i].colourNum%2==1 and (i<len(self.boxList)-11 or self.checkIfCrosswordFinished()):
                 self.textList[i].mouseOver=True
         
         #numbers
         for i in range(len(self.boxList), len(self.textList)):
             self.textList[i].draw()
+            
 
     def checkIfCrosswordFinished(self):
         for text in self.textList:
@@ -405,7 +452,6 @@ def showQuestions():
         utility.toScreenTopLeft("13. What is broken on the bathroom room?", font, colour, x, y+gap*10)
         utility.toScreenTopLeft("15. What fruit is in the bowl?", font, colour, x, y+gap*11)#apples
 
-
 textAndBoxes=TextAndBoxes()
 def showCrossword():
     #showing the crossword
@@ -413,6 +459,8 @@ def showCrossword():
     utility.imageToScreen("crossword.png", 10, 25, 550, 550)
     showQuestions()
     textAndBoxes.draw()
+    utility.toScreen2("When you have finished the crossword, unscramble the", "highlighted letters and enter the name you find here:", const.FONT15, const.BLACK, 170, 90)
+    textAndBoxes.outlines()
     if textAndBoxes.checkIfCrosswordFinished():
         textAndBoxes.showSpecial()
     gameButton.draw()
