@@ -6,7 +6,7 @@ WIDTH, HEIGHT = 900, 600
 FPS = 30
 FPS_SCALING = 30 / FPS
 GAME_ENDED_EVENT = pygame.USEREVENT + 1
-TIME_IN_SECONDS = 300
+TIME_IN_SECONDS = 600
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
