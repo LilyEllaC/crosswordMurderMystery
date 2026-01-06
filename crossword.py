@@ -316,7 +316,7 @@ class Boxes():
         self.colourNum=colourNum
         self.colours=[const.WHITE, const.GRAY, const.RED, const.DARK_RED]
         self.colour=self.colours[colourNum]
-        self.rect=(x, y, 24.5, 27.5)
+        self.rect=(x, y, 24, 27.5)
         self.image=pygame.draw.rect(const.screen, self.colour, self.rect)
 
     def hoveredOver(self):
@@ -357,14 +357,49 @@ class Letters():
             colour=const.RED
         utility.toScreen(self.letter, self.font, colour, self.x, self.y)
 
+def showQuestions():
+    colour=const.BLACK
+    font=const.FONT17
+    y=50
+    gap=20
+    #acrosses
+    if True:
+        x=570
+        utility.toScreenTopLeft("Across", const.FONT25, colour, x, 20)
+        utility.toScreenTopLeft("3. What is in the victim's hand?", font, colour, x, y+gap*0)#flower
+        utility.toScreenTopLeft("6. What is on the island in the kitchen?", font, colour, x, y+gap*1)
+        utility.toScreenTopLeft("8. What time is on the broken clock?", font, colour, x, y+gap*2)
+        utility.toScreenTopLeft("11. How any flowersare in the red pot?", font, colour, x, y+gap*3)
+        utility.toScreenTopLeft("12. What is the floor of the bathroom made of?", font, colour, x, y+gap*4)
+        utility.toScreenTopLeft("14. What is on the edge of the sink?", font, colour, x, y+gap*5)#candle Stick
+        utility.toScreenTopLeft("16. What is on the table in the dining room", font, colour, x, y+gap*6)#rope??
+        utility.toScreenTopLeft("17. What colour is the carpet in the hallways?", font, colour, x, y+gap*7)
+        utility.toScreenTopLeft("18. What tool is on the dining table?", font, colour, x, y+gap*8)#wrench
+        #downs
+        y=345
+        utility.toScreenTopLeft("Down", const.FONT25, colour, x, 315)
+        utility.toScreenTopLeft("1. What is under the desk?", font, colour, x, y+gap*0)
+        utility.toScreenTopLeft("2. What is on the painting in the living room?", font, colour, x, y+gap*1)
+        utility.toScreenTopLeft("4. Where was suspect #4 at the time of the murder?", font, colour, x, y+gap*2)#kitchen
+        utility.toScreenTopLeft("5. What type of tree is on the painting in the", font, colour, x, y+gap*3)
+        utility.toScreenTopLeft("   office?", font, colour, x, y+gap*4)
+        utility.toScreenTopLeft("7. What colour is the leftmost book on the ", font, colour, x, y+gap*5)
+        utility.toScreenTopLeft("   living room bookshelf?", font, colour, x, y+gap*6)
+        utility.toScreenTopLeft("8. What is on the stove in the kitchen", font, colour, x, y+gap*7)
+        utility.toScreenTopLeft("9. What is sticking out of the ground in the garden?", font, colour, x, y+gap*8)#pipe
+        utility.toScreenTopLeft("10. What colour are the flowers in the living room?", font, colour, x, y+gap*9)
+        utility.toScreenTopLeft("13. What is broken on the bathroom room?", font, colour, x, y+gap*10)
+        utility.toScreenTopLeft("15. What fruit is in the bowl?", font, colour, x, y+gap*11)#apples
+
 
 textAndBoxes=TextAndBoxes()
 def showCrossword():
     #showing the crossword
     const.screen.fill(const.WHITE)
     utility.imageToScreen("crossword.png", 10, 25, 550, 550)
-    utility.imageToScreen("across.png", 570, 25, 320, 240)
-    utility.imageToScreen("downs.png", 570, 320, 325, 255)
+    showQuestions()
+    #utility.imageToScreen("across.png", 570, 25, 320, 240)
+    #utility.imageToScreen("downs.png", 570, 320, 325, 255)
     textAndBoxes.draw()
     gameButton.draw()
     gameButton.isHovered()

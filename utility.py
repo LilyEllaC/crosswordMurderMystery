@@ -23,6 +23,10 @@ def toScreen3(words1, words2, words3, font, colour, x, y):
     toScreen(words2, font, colour, x, y)
     toScreen(words3, font, colour, x, y + font.get_height())
 
+#so that he coordinate is the top left not the center
+def toScreenTopLeft(words, font, colour, x, y):
+    text = font.render(words, True, colour)
+    const.screen.blit(text, (x, y))
 
 def imageToScreen(imageName, x, y, width, height):
     image = pygame.image.load(imageName)

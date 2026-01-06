@@ -56,6 +56,7 @@ pygame.font.init()
 FONT_TYPE = "w.ttf"
 FONT10 = pygame.font.Font(FONT_TYPE, 10)
 FONT15 = pygame.font.Font(FONT_TYPE, 15)
+FONT17 = pygame.font.Font(FONT_TYPE, 17)
 FONT20 = pygame.font.Font(FONT_TYPE, 20)
 FONT25 = pygame.font.Font(FONT_TYPE, 25)
 FONT30 = pygame.font.Font(FONT_TYPE, 30)
