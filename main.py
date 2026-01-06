@@ -7,6 +7,7 @@ import help
 import intro
 import end
 import asyncio
+import audio_manager
 
 # import math
 import time
@@ -148,6 +149,10 @@ async def main():
 
     addToSquare()
 
+    audio = audio_manager.AudioManager()
+
+    audio.play_theme("assets/clue.ogg")
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -161,6 +166,9 @@ async def main():
                     if intro.startButton.isHovered():
                         gameState = gameStates.PLAYING
                         game.startTime = datetime.datetime.now()
+
+                        audio.play_sfx("assets/crow1.ogg")
+                        audio.play_sfx("assets/pigeon.ogg", 0.3)
                     elif intro.quitButton.isHovered():
                         running = False
 
