@@ -1,6 +1,8 @@
 import constants as const
 import sprites
 import utility
+import game
+import datetime
 
 backButton = sprites.Button(
     const.WIDTH//2,
@@ -34,3 +36,8 @@ def showEnd():
     
     #button
     backButton.draw()
+
+
+def resetVariables():
+    game.startTime=None
+

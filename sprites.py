@@ -98,7 +98,11 @@ class Button:
 
         if self.hasOutline:
             pygame.draw.rect(const.screen, const.BLACK, self.rect, 3)
-
+        if self.isHovered():
+            self.colour=self.colours[1]
+        else:
+            self.colour=self.colours[0]
+        
         utility.toScreen(
             self.text,
             self.font,

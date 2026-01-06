@@ -506,7 +506,7 @@ def showQuestions():
             y + gap * 1,
         )
         utility.toScreenTopLeft(
-            "4. Where was suspect #4 at the time of the murder?",
+            "4. Which room has a window with red curtains?",
             font,
             colour,
             x,

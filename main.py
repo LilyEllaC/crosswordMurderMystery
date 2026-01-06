@@ -196,9 +196,9 @@ async def main():
                         audio.play_theme("assets/clue.ogg")
                 if gameState == gameStates.LOSS:
                     if loss.backButton.isHovered():
+                        loss.resetVariables()
                         gameState = gameStates.STARTING_SCREEN
                         audio.play_theme("assets/clue.ogg")
-
 
                 #crossword and help stuff
                 if gameState == gameStates.CROSSWORD:
@@ -362,6 +362,7 @@ async def main():
 
         if gameState == gameStates.STARTING_SCREEN:
             intro.titleScreen()
+            print("start")
         elif gameState == gameStates.PLAYING:
             game.showGame()
         elif gameState == gameStates.CROSSWORD:
