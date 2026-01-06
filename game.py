@@ -37,7 +37,7 @@ bottomSquareSurface.set_alpha(128)
 bottomSquareSurface.fill(bottomSquareColor)
 
 crosswordButton=sprites.Button(10, 10, 200, 50, "Crossword", const.FONT37, const.GREEN, const.DARK_GREEN, True)
-helpButton=sprites.Button(10, const.HEIGHT - 50, 30, 45, "?", const.FONT37, const.WHITE, const.DARK_GREEN, False)
+helpButton=sprites.Button(10, const.HEIGHT - 50, 30, 45, "?", const.FONT37, const.WHITE, const.GRAY, False)
 helpButton.textColour = const.BLACK
 
 def timing():
