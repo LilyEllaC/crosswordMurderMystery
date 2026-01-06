@@ -380,6 +380,7 @@ class TextAndBoxes:
     def resetLetters(self):
         for i in range(0, len(self.boxList)):
             self.textList[i].letter=" "
+            self.boxList[i].colourNum=0
 
 
 class Boxes:
