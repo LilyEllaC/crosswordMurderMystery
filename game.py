@@ -1,6 +1,6 @@
 import constants as const
 import pygame
-from sprites import Objects, Player
+from sprites import Objects, Player, Button
 
 map = Objects(0 + (-320), 6 + (-1050), 992 * 2, 736 * 2, "assets/map.png")
 player = Player(const.WIDTH / 2, const.HEIGHT / 2, 64, 64)
@@ -31,11 +31,13 @@ bottomSquareSurface = pygame.Surface((32, 32))
 bottomSquareSurface.set_alpha(128)
 bottomSquareSurface.fill(bottomSquareColor)
 
+crosswordButton=Button(10, 10, 200, 50, "Crossword", const.FONT37, const.GREEN, const.DARK_GREEN, True)
 
 def show_game():
     const.screen.fill(const.BLACK)
-
     map.draw()
+    crosswordButton.draw()
+    crosswordButton.isHovered()
     player.draw()
 
     for square_x, square_y in leftSquares:

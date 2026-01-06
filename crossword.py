@@ -1,9 +1,12 @@
 import pygame
 import constants as const
 import utility
+from sprites import Button
 # pylint: disable=no-member
 
 pygame.init()
+
+gameButton=Button(10, 10, 140, 50, "Game", const.FONT37, const.RED, const.DARK_RED, True)
 
 def isNumber(digit):
     for i in range(0,9):
@@ -363,6 +366,8 @@ def showCrossword():
     utility.imageToScreen("across.png", 570, 25, 320, 240)
     utility.imageToScreen("downs.png", 570, 320, 325, 255)
     textAndBoxes.draw()
+    gameButton.draw()
+    gameButton.isHovered()
 
 def typing(event):
     #getting them to be allowed to type

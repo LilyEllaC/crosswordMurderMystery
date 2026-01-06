@@ -171,6 +171,9 @@ def main():
                         running = False
 
                 if gameState == gameStates.PLAYING:
+                    if game.crosswordButton.isHovered():
+                        gameState=gameStates.CROSSWORD
+                    
                     keys = pygame.key.get_pressed()
 
                     relative_x = (
@@ -253,8 +256,13 @@ def main():
 
                     addToSquare()
 
-                if gameState == gameStates.CROSSWORD and event.type == pygame.KEYDOWN:
-                    crossword.typing(event)
+                if gameState == gameStates.CROSSWORD:
+                    if event.type == pygame.KEYDOWN:
+                        crossword.typing(event)
+                    if event.type==pygame.MOUSEBUTTONDOWN and crossword.gameButton.isHovered:
+                        print("hello")
+                        gameState=gameStates.PLAYING
+
 
                 move(True)
 
