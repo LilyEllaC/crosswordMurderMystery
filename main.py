@@ -181,9 +181,6 @@ async def main():
                     elif intro.quitButton.isHovered():
                         running = False
 
-                if gameState == gameStates.WON:
-                    if won.backButton.isHovered():
-                        gameState=gameStates.STARTING_SCREEN
                 if gameState == gameStates.PLAYING:
                     if game.crosswordButton.isHovered():
                         gameState = gameStates.CROSSWORD
@@ -192,12 +189,18 @@ async def main():
                     if game.helpButton.isHovered():
                         gameState = gameStates.HELP
                         continue
-
+                #restarting the game from won and loss
                 if gameState == gameStates.WON:
                     if won.backButton.isHovered():
                         gameState = gameStates.STARTING_SCREEN
                         audio.play_theme("assets/clue.ogg")
+                if gameState == gameStates.LOSS:
+                    if loss.backButton.isHovered():
+                        gameState = gameStates.STARTING_SCREEN
+                        audio.play_theme("assets/clue.ogg")
 
+
+                #crossword and help stuff
                 if gameState == gameStates.CROSSWORD:
                     if crossword.gameButton.isHovered():
                         gameState = gameStates.PLAYING
