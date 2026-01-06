@@ -8,6 +8,7 @@ import intro
 import won
 import loss
 import asyncio
+import audio_manager
 
 # import math
 import time
@@ -150,6 +151,10 @@ async def main():
 
     addToSquare()
 
+    audio = audio_manager.AudioManager()
+
+    audio.play_theme("assets/clue.ogg")
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -160,18 +165,48 @@ async def main():
                 gameState = gameStates.LOSS
             if event.type == const.GAME_WON_EVENT:
                 gameState = gameStates.WON"""
-            if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+            #if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+            #if event.type == const.GAME_ENDED_EVENT:
+             #   gameState = gameStates.END
+                
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 if gameState == gameStates.STARTING_SCREEN:
                     if intro.startButton.isHovered():
                         gameState = gameStates.PLAYING
                         game.startTime = datetime.datetime.now()
+
+                        audio.play_sfx("assets/crow1.ogg")
+                        audio.play_sfx("assets/pigeon.ogg", 0.3)
                     elif intro.quitButton.isHovered():
                         running = False
 
                 if gameState == gameStates.WON:
                     if won.backButton.isHovered():
-                        gameState = gameStates.STARTING_SCREEN
+                        gameState=gameStates.STARTING_SCREEN
+                if gameState == gameStates.PLAYING:
+                    if game.crosswordButton.isHovered():
+                        gameState = gameStates.CROSSWORD
+                        continue
 
+                    if game.helpButton.isHovered():
+                        gameState = gameStates.HELP
+                        continue
+
+                if gameState == gameStates.WON:
+                    if won.backButton.isHovered():
+                        gameState = gameStates.STARTING_SCREEN
+                        audio.play_theme("assets/clue.ogg")
+
+                if gameState == gameStates.CROSSWORD:
+                    if crossword.gameButton.isHovered():
+                        gameState = gameStates.PLAYING
+
+                if gameState == gameStates.HELP:
+                    if help.backButton.isHovered():
+                        gameState = gameStates.PLAYING
+
+            if event.type == pygame.KEYDOWN:
                 if gameState == gameStates.PLAYING:
                     if (
                         game.crosswordButton.isHovered()
@@ -317,6 +352,9 @@ async def main():
             gameState=gameStates.WON
         if game.timing():
             gameState=gameStates.LOSS
+            audio.stop_theme()
+            audio.play_sfx("assets/grave.ogg")
+
         move(False)
 
         if gameState == gameStates.STARTING_SCREEN:
