@@ -1,7 +1,7 @@
 import pygame
 import json
 
-DEV_MODE = True
+DEV_MODE = False
 WIDTH, HEIGHT = 900, 600
 FPS = 30
 FPS_SCALING = 30 / FPS
@@ -35,18 +35,15 @@ def reevalConstants(coords):
         BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
 
 
-d = json.load(open("coords.json"))
+try:
+    with open("coords.json", "r") as f:
+        existingCoords = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError) as e:
+    print(f"Warning: Could not load coords.json: {e}")
+    existingCoords = {"left": [], "right": [], "top": [], "bottom": []}
 
-reevalConstants(d)
+reevalConstants(existingCoords)
 
-# for coord in d["left"]:
-#     LEFT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-# for coord in d["right"]:
-#     RIGHT_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-# for coord in d["top"]:
-#     TOP_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
-# for coord in d["bottom"]:
-#     BOTTOM_COORDS.append((coord["absolute"][0], coord["absolute"][1]))
 
 # colours
 RED = (255, 0, 0)

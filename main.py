@@ -1,3 +1,4 @@
+import sys
 import datetime
 import constants as const
 import pygame
@@ -21,7 +22,7 @@ import crossword
 
 # running variable so it stops
 running = True
-clock=pygame.time.Clock()
+clock = pygame.time.Clock()
 
 
 class gameStates(Enum):
@@ -38,7 +39,7 @@ moveDelay = 150
 
 # DEV #####
 
-existingCoords = json.load(open("coords.json"))
+existingCoords = const.existingCoords
 
 # {
 #     "left/right/top/bottom": [
@@ -161,11 +162,18 @@ async def main():
                     elif intro.quitButton.isHovered():
                         running = False
 
+                if gameState == gameStates.END:
+                    if end.backButton.isHovered():
+                        gameState = gameStates.STARTING_SCREEN
+
                 if gameState == gameStates.PLAYING:
-                    if game.crosswordButton.isHovered() and event.type==pygame.MOUSEBUTTONDOWN:
-                        gameState=gameStates.CROSSWORD
+                    if (
+                        game.crosswordButton.isHovered()
+                        and event.type == pygame.MOUSEBUTTONDOWN
+                    ):
+                        gameState = gameStates.CROSSWORD
                         continue
-                    
+
                     keys = pygame.key.get_pressed()
 
                     relative_x = (
@@ -238,14 +246,16 @@ async def main():
                                 )
                     if keys[pygame.K_r]:
                         if const.DEV_MODE:
-                            const.reevalConstants({
-                                "left": leftCoords,
-                                "right": rightCoords,
-                                "top": topCoords,
-                                "bottom": bottomCoords,
-                            })
+                            const.reevalConstants(
+                                {
+                                    "left": leftCoords,
+                                    "right": rightCoords,
+                                    "top": topCoords,
+                                    "bottom": bottomCoords,
+                                }
+                            )
                     if keys[pygame.K_p]:
-                        if const.DEV_MODE:
+                        if const.DEV_MODE and sys.platform != "emscripten":
                             with open("coords.json", "w") as f:
                                 json.dump(
                                     {
@@ -265,9 +275,11 @@ async def main():
                 if gameState == gameStates.CROSSWORD:
                     if event.type == pygame.KEYDOWN:
                         crossword.typing(event)
-                    if event.type==pygame.MOUSEBUTTONDOWN and crossword.gameButton.isHovered:
-                        gameState=gameStates.PLAYING
-
+                    if (
+                        event.type == pygame.MOUSEBUTTONDOWN
+                        and crossword.gameButton.isHovered
+                    ):
+                        gameState = gameStates.PLAYING
 
                 move(True)
 
