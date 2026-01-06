@@ -1,16 +1,18 @@
 import pygame
 import constants as const
 import utility
+# pylint: disable=no-member
+
 pygame.init()
 
-def typing():
+
+def typing(event):
     #getting them to be allowed to type
-    for event in pygame.event.get():
-        if event.type==pygame.KEYDOWN():
-            if event.key==pygame.K_BACKSPACE:
-                letter=letter[:-1]
-            else:
-                letter+=event.unicode
+    
+    if event.key==pygame.K_BACKSPACE:
+        letter=letter[:-1]
+    else:
+        letter+=event.unicode
 
 
 class TextAndBoxes():

@@ -98,7 +98,7 @@ def main():
                     if keys[pygame.K_d]:
                         addKey("d")
                 if gameState==gameStates.CROSSWORD:
-                    crossword.typing(event.key)
+                    crossword.typing(event)
                 move(True)
 
             elif event.type == pygame.KEYUP:
