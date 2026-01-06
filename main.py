@@ -269,6 +269,8 @@ async def main():
                                 )
 
                             print("SAVED TO FILE")
+                    if keys[pygame.K_t]:
+                        game.player.toggle_direction()
 
                     addToSquare()
 
