@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.x = x
         self.rect.y = y
-        self.movement=1
+        self.movement = 1
 
         self.direction = "right"
 
@@ -34,6 +34,14 @@ class Player(pygame.sprite.Sprite):
         self.direction = direction
 
         self.image = pygame.transform.flip(self.image, True, False)
+
+    def toggle_direction(self):
+        if self.direction == "right":
+            self.direction = "left"
+            self.image = pygame.transform.flip(self.image, True, False)
+        else:
+            self.direction = "right"
+            self.image = pygame.transform.flip(self.image, True, False)
 
     def draw(self):
         self.rect.x = self.x
