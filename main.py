@@ -3,7 +3,8 @@ import constants as const
 import pygame
 import game
 import intro
-import math
+
+# import math
 import time
 import json
 
@@ -32,12 +33,33 @@ keysDown = []
 lastMoveTS = 0
 moveDelay = 150
 
+devMode = False
+
 # DEV #####
 
-leftCoords = []
-rightCoords = []
-topCoords = []
-bottomCoords = []
+existingCoords = json.load(open("coords.json"))
+
+# {
+#     "left/right/top/bottom": [
+#         [
+#             {
+#                 "relative": [
+#                     X,
+#                     Y
+#                 ],
+#                 "absolute": [
+#                     X,
+#                     Y
+#                 ]
+#             }
+#         ]
+#     ],
+# }
+
+leftCoords = existingCoords["left"]
+rightCoords = existingCoords["right"]
+topCoords = existingCoords["top"]
+bottomCoords = existingCoords["bottom"]
 
 ###########
 
@@ -93,6 +115,38 @@ def move(bypassDebounce):
             game.player.set_direction("right")
 
 
+def addToSquare():
+    game.leftSquares = []
+    game.rightSquares = []
+    game.topSquares = []
+    game.bottomSquares = []
+
+    for coord in leftCoords:
+        game.leftSquares.append(coord["relative"])
+    for coord in rightCoords:
+        game.rightSquares.append(coord["relative"])
+    for coord in topCoords:
+        game.topSquares.append(coord["relative"])
+    for coord in bottomCoords:
+        game.bottomSquares.append(coord["relative"])
+
+
+def checkCoords(coords):
+    for coord in coords:
+        if [game.map.x, game.map.y] == coord["absolute"]:
+            # print("coords exist")
+            return True
+    return False
+
+
+def findCoordIndex(coords):
+    for i, coord in enumerate(coords):
+        if [game.map.x, game.map.y] == coord["absolute"]:
+            # print("found at index", i)
+            return i
+    return -1
+
+
 # main
 def main():
     pygame.display.set_caption("Crossword Murder Mystery")
@@ -100,6 +154,9 @@ def main():
     global running
 
     gameState = gameStates.STARTING_SCREEN
+
+    if devMode:
+        addToSquare()
 
     while running:
         for event in pygame.event.get():
@@ -134,45 +191,52 @@ def main():
                     if keys[pygame.K_d]:
                         addKey("d")
                     if keys[pygame.K_LEFT]:
-                        if (relative_x, relative_y) in game.leftSquares:
-                            game.leftSquares.remove((relative_x, relative_y))
+                        if checkCoords(leftCoords):
+                            idx = findCoordIndex(leftCoords)
+                            leftCoords.pop(idx)
                         else:
-                            game.leftSquares.append((relative_x, relative_y))
+                            leftCoords.append(
+                                {
+                                    "relative": [relative_x, relative_y],
+                                    "absolute": [game.map.x, game.map.y],
+                                }
+                            )
 
-                        if (game.map.x, game.map.y) in leftCoords:
-                            leftCoords.remove((game.map.x, game.map.y))
-                        else:
-                            leftCoords.append((game.map.x, game.map.y))
                     if keys[pygame.K_RIGHT]:
-                        if (relative_x, relative_y) in game.rightSquares:
-                            game.rightSquares.remove((relative_x, relative_y))
+                        if checkCoords(rightCoords):
+                            idx = findCoordIndex(rightCoords)
+                            rightCoords.pop(idx)
                         else:
-                            game.rightSquares.append((relative_x, relative_y))
+                            rightCoords.append(
+                                {
+                                    "relative": [relative_x, relative_y],
+                                    "absolute": [game.map.x, game.map.y],
+                                }
+                            )
 
-                        if (game.map.x, game.map.y) in rightCoords:
-                            rightCoords.remove((game.map.x, game.map.y))
-                        else:
-                            rightCoords.append((game.map.x, game.map.y))
                     if keys[pygame.K_UP]:
-                        if (relative_x, relative_y) in game.topSquares:
-                            game.topSquares.remove((relative_x, relative_y))
+                        if checkCoords(topCoords):
+                            idx = findCoordIndex(topCoords)
+                            topCoords.pop(idx)
                         else:
-                            game.topSquares.append((relative_x, relative_y))
+                            topCoords.append(
+                                {
+                                    "relative": [relative_x, relative_y],
+                                    "absolute": [game.map.x, game.map.y],
+                                }
+                            )
 
-                        if (game.map.x, game.map.y) in topCoords:
-                            topCoords.remove((game.map.x, game.map.y))
-                        else:
-                            topCoords.append((game.map.x, game.map.y))
                     if keys[pygame.K_DOWN]:
-                        if (relative_x, relative_y) in game.bottomSquares:
-                            game.bottomSquares.remove((relative_x, relative_y))
+                        if checkCoords(bottomCoords):
+                            idx = findCoordIndex(bottomCoords)
+                            bottomCoords.pop(idx)
                         else:
-                            game.bottomSquares.append((relative_x, relative_y))
-
-                        if (game.map.x, game.map.y) in bottomCoords:
-                            bottomCoords.remove((game.map.x, game.map.y))
-                        else:
-                            bottomCoords.append((game.map.x, game.map.y))
+                            bottomCoords.append(
+                                {
+                                    "relative": [relative_x, relative_y],
+                                    "absolute": [game.map.x, game.map.y],
+                                }
+                            )
                     if keys[pygame.K_p]:
                         with open("coords.json", "w") as f:
                             json.dump(
@@ -187,7 +251,9 @@ def main():
                             )
                         print("SAVED TO FILE")
 
-                if gameState == gameStates.CROSSWORD and event.type==pygame.KEYDOWN:
+                    addToSquare()
+
+                if gameState == gameStates.CROSSWORD and event.type == pygame.KEYDOWN:
                     crossword.typing(event)
 
                 move(True)
