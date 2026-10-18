@@ -2,7 +2,7 @@ import constants as const
 import sprites
 import utility
 
-backButton = sprites.Button(10, 0, 80, 80, "Back", const.FONT37, const.WHITE, const.BLACK, False)
+backButton = sprites.Button(10, 0, 80, 80, "Back", const.FONT37, const.WHITE, const.GRAY, False)
 backButton.textColour = const.BLACK
 
 def showHelp():
